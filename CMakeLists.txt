@@ -4,7 +4,7 @@ enable_testing()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
-set(SOURCE_FILES main.c)
+set(SOURCE_FILES main.c sysCall/syscalls.c sysCall/syscalls.c sysCall/syscalls.h)
 add_executable(Project1 ${SOURCE_FILES})
 
 

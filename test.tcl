@@ -13,3 +13,5 @@ set result [exec $TEST_EXE]
 
 # display the results
 puts "$result"
+
+return -code ok

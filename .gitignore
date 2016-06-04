@@ -1,0 +1,14 @@
+# idea files
+.idea/
+
+# misc files
+*.xml
+sysCalls
+build/
+_build/
+*.o
+*.a
+
+# os X files
+.DS_Store
+

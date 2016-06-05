@@ -2,9 +2,6 @@
 
 source common.tcl
 
-#proc testsPass {
-#
-#}
 
 if {[file isdirectory $MAIN_EXE]} {
   # this is a directory
@@ -13,12 +10,20 @@ if {[file isdirectory $MAIN_EXE]} {
   exec $BUILD_SCRIPT_FILE
 }
 
-## if tests pass
-#if {testsPass()}{
-#    # then run
-    set result [exec $MAIN_EXE]
+if { [catch {set result [exec $TEST_SCRIPT_FILE]} reason] } {
 
-    # display the results
-    puts "$result"
-#}
+    puts "Failed: $reason"
+
+} else {
+
+    if { [catch {set result [exec $MAIN_EXE]} reason] } {
+
+    puts "Failed: $reason"
+
+    } else {
+
+    puts $result
+
+    }
+}
 

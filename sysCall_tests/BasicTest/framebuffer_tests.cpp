@@ -4,11 +4,12 @@
 
 #include <fcntl.h>
 #include "gtest/gtest.h"
+#include "../../sysCall/syscalls.h"
 
 TEST(BasicTest, Open_zeroth_framebuffer){
     // opening this file will work
 
-    int filedesc = open("/dev/fb0", O_WRONLY | O_APPEND);
+    int filedesc = open_framebuffer(O_WRONLY | O_APPEND);
     printf("Opened filedesc: %d\n", filedesc);
 
     ASSERT_GT(filedesc,0);
@@ -16,7 +17,7 @@ TEST(BasicTest, Open_zeroth_framebuffer){
 
 TEST(BasicTest, Write_to_zeroth_framebuffer){
 
-    int filedesc = open("/dev/fb0", O_WRONLY | O_APPEND);
+    int filedesc = open_framebuffer( O_WRONLY | O_APPEND);
 
     if(filedesc < 0){
         FAIL()  << "Failed to open";
@@ -35,7 +36,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer){
 #define BUFFER_SIZE 128
 
 TEST(BasicTest, Read_from_zeroth_framebuffer){
-    int filedesc = open("/dev/fb0", O_RDONLY);
+    int filedesc = open_framebuffer( O_RDONLY);
     printf("Opened filedesc: %d\n", filedesc);
 
     unsigned char *readbuffer = (unsigned char*) malloc(BUFFER_SIZE);

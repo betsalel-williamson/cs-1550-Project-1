@@ -36,7 +36,8 @@ TEST(BasicTest, Read_from_zeroth_framebuffer){
     int filedesc = open("/dev/fb0", O_WRONLY | O_APPEND);
     printf("Opened filedesc: %d", filedesc);
 
-    int readbuffer[1] = {0};
+    void *readbuffer = (char*) malloc(1024);
+
     ssize_t bytesRead;
     if ((bytesRead = read(filedesc,readbuffer,1)) == -1){
         FAIL() << "Failed to read";

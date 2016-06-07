@@ -36,7 +36,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer){
 #define BUFFER_SIZE 128
 
 TEST(BasicTest, Read_from_zeroth_framebuffer){
-    int filedesc = open_framebuffer( O_RDONLY);
+    int filedesc = open_framebuffer(O_RDONLY);
     printf("Opened filedesc: %d\n", filedesc);
 
     unsigned char *readbuffer = (unsigned char*) malloc(BUFFER_SIZE);

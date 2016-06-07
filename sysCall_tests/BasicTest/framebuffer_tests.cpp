@@ -6,28 +6,27 @@
 #include "gtest/gtest.h"
 #include "../../sysCall/syscalls.h"
 
-TEST(BasicTest, Open_zeroth_framebuffer){
+TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work
 
-    int filedesc = open_framebuffer(O_WRONLY | O_APPEND);
+    int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
     printf("Opened filedesc: %d\n", filedesc);
 
-    ASSERT_GT(filedesc,0);
+    ASSERT_GT(filedesc, 0);
 }
 
-TEST(BasicTest, Write_to_zeroth_framebuffer){
+TEST(BasicTest, Write_to_zeroth_framebuffer) {
 
-    int filedesc = open_framebuffer( O_WRONLY | O_APPEND);
+    int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
 
-    if(filedesc < 0){
-        FAIL()  << "Failed to open";
+    if (filedesc < 0) {
+        FAIL() << "Failed to open";
     }
 
     int writebuffer[1] = {5};
     ssize_t bytesWritten;
 
-    if((bytesWritten = write(filedesc,(void *) writebuffer, 1)) != 1)
-    {
+    if ((bytesWritten = write(filedesc, (void *) writebuffer, 1)) != 1) {
         FAIL() << "Failed to write";
     }
     ASSERT_EQ(bytesWritten, 1);
@@ -35,14 +34,14 @@ TEST(BasicTest, Write_to_zeroth_framebuffer){
 
 #define BUFFER_SIZE 128
 
-TEST(BasicTest, Read_from_zeroth_framebuffer){
-    int filedesc = open_framebuffer(O_RDONLY);
+TEST(BasicTest, Read_from_zeroth_framebuffer) {
+    int filedesc = open_frame_buffer(O_RDONLY);
     printf("Opened filedesc: %d\n", filedesc);
 
-    unsigned char *readbuffer = (unsigned char*) malloc(BUFFER_SIZE);
+    unsigned char *readbuffer = (unsigned char *) malloc(BUFFER_SIZE);
 
     ssize_t bytesRead;
-    if ((bytesRead = read(filedesc,(void *)readbuffer,BUFFER_SIZE)) < 0){
+    if ((bytesRead = read(filedesc, (void *) readbuffer, BUFFER_SIZE)) < 0) {
         printf("Bytes read: %d\n", (int) bytesRead);
         FAIL() << "Failed to read";
     }
@@ -54,11 +53,11 @@ TEST(BasicTest, Read_from_zeroth_framebuffer){
 
     // printf("0x"); -- uncomment if you want to start with "0x"
 
-    for(ii = 0; ii < BUFFER_SIZE; ii++) {
-        printf("%02x", (unsigned int)(readbuffer[ii]));
-        if(ii%4 == 3) printf(" ");    // groups of 8: makes more readable
+    for (ii = 0; ii < BUFFER_SIZE; ii++) {
+        printf("%02x", (unsigned int) (readbuffer[ii]));
+        if (ii % 4 == 3) printf(" ");    // groups of 8: makes more readable
         // uncomment if you want "all one line"
-        if(ii%32 == 31) printf("\n"); // ditto
+        if (ii % 32 == 31) printf("\n"); // ditto
     }
 
     printf("\n");

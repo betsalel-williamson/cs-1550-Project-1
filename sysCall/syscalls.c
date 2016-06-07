@@ -15,12 +15,12 @@ void init_graphics() {
 
     size_t len = 640;
 
-    int * address = mmap(0, len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    int *address = mmap(0, len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 
     *address = 1;
 /* Use data at address. */
 }
 
-int open_framebuffer(int options){
+int open_frame_buffer(int options) {
     return open("/dev/fb0", options);
 }

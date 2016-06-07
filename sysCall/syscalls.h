@@ -7,7 +7,7 @@
 
 void init_graphics();// open, ioctl, mmap
 
-int open_framebuffer(int);
+int open_frame_buffer(int);
 
 void exit_graphics();// ioctl
 

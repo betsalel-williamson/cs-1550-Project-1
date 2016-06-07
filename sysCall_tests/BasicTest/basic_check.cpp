@@ -45,4 +45,6 @@ TEST(BasicTest, Read_from_zeroth_framebuffer){
     }
 
     ASSERT_EQ(bytesRead, 1024);
+    printf("Bytes read: %d\n", (int) bytesRead);
+    printf("%s\n", (char *) readbuffer);
 }

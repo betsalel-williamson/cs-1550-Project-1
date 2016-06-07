@@ -4,7 +4,7 @@
 
 #include <fcntl.h>
 #include "gtest/gtest.h"
-#include "../../sysCall/syscalls.h"
+#include "../../sysCall/include/syscalls.h"
 
 TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work

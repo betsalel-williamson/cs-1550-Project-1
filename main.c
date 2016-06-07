@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "sysCall/syscalls.h"
+#include "sysCall/include/syscalls.h"
 
 int main(int argc, char **argv) {
 

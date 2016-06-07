@@ -4,7 +4,7 @@
 
 #include <fcntl.h>
 #include <sys/mman.h>
-#include "syscalls.h"
+#include "../include/syscalls.h"
 
 void init_graphics() {
     int fd;

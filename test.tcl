@@ -13,13 +13,13 @@ set result [exec $TEST_EXE]
 # display the results
 puts "$result"
 
-if {[lsearch -all -inline $result *PASSED*] >= 0} {
-    return -code ok
- } else { 
-    return -code error
+proc searchResultsForPassed {result} {
+    if {[lsearch -all -inline $result *PASSED*] >= 0} {
+        return -code ok
+     } else { 
+        return -code error
+    }
 }
-
-
 
 
 

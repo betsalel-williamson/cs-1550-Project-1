@@ -39,9 +39,9 @@ TEST(BasicTest, Read_from_zeroth_framebuffer){
     void *readbuffer = (char*) malloc(1024);
 
     ssize_t bytesRead;
-    if ((bytesRead = read(filedesc,readbuffer,1)) == -1){
+    if ((bytesRead = read(filedesc,readbuffer,1024)) < 0){
         FAIL() << "Failed to read";
     }
 
-    ASSERT_EQ(bytesRead, 1);
+    ASSERT_EQ(bytesRead, 1024);
 }

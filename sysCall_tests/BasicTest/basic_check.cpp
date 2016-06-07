@@ -22,7 +22,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer){
         FAIL()  << "Failed to open";
     }
 
-    int writebuffer[1] = {1};
+    int writebuffer[1] = {5};
     ssize_t bytesWritten;
 
     if((bytesWritten = write(filedesc,(void *) writebuffer, 1)) != 1)

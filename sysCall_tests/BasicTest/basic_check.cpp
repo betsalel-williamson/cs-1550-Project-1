@@ -32,7 +32,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer){
     ASSERT_EQ(bytesWritten, 1);
 }
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 128
 
 TEST(BasicTest, Read_from_zeroth_framebuffer){
     int filedesc = open("/dev/fb0", O_RDONLY);

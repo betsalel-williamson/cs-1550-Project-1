@@ -19,7 +19,7 @@ TEST(BasicTest, Write_To_Zeroth_Framebuffer){
     int filedesc = open("/dev/fb0", O_WRONLY | O_APPEND);
 
     if(filedesc < 0){
-        FAIL();
+        FAIL()  << "Failed to open";
     }
 
     int writebuffer[1] = {1};
@@ -27,26 +27,16 @@ TEST(BasicTest, Write_To_Zeroth_Framebuffer){
 
     if((bytesWritten = write(filedesc,(void *) writebuffer, 1)) != 1)
     {
-        FAIL();
+        FAIL() << "Failed to write";
     }
     ASSERT_EQ(bytesWritten, 1);
 
     int readbuffer[1] = {0};
     ssize_t bytesRead;
     if ((bytesRead = read(filedesc,readbuffer,1)) != 1){
-        FAIL();
+        FAIL() << "Failed to read";
     }
 
     ASSERT_EQ(bytesRead, 1);
-}
-
-
-TEST(BasicTest, FailTest ){
-    EXPECT_EQ(false, false);
-}
-
-
-TEST(BasicTest, EQTest){
-    EXPECT_EQ(6,6);
 }
 

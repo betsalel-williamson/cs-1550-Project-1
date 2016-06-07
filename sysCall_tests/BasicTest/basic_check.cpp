@@ -40,6 +40,7 @@ TEST(BasicTest, Read_from_zeroth_framebuffer){
 
     ssize_t bytesRead;
     if ((bytesRead = read(filedesc,readbuffer,1024)) < 0){
+        printf("Bytes read: %d", bytesRead);
         FAIL() << "Failed to read";
     }
 

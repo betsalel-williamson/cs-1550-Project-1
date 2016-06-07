@@ -9,7 +9,7 @@ TEST(BasicTest, Open_zeroth_framebuffer){
     // opening this file will work
 
     int filedesc = open("/dev/fb0", O_WRONLY | O_APPEND);
-    printf("Opened filedesc: %d", filedesc);
+    printf("Opened filedesc: %d\n", filedesc);
 
     ASSERT_GT(filedesc,0);
 }
@@ -33,14 +33,14 @@ TEST(BasicTest, Write_to_zeroth_framebuffer){
 }
 
 TEST(BasicTest, Read_from_zeroth_framebuffer){
-    int filedesc = open("/dev/fb0", O_WRONLY | O_APPEND);
-    printf("Opened filedesc: %d", filedesc);
+    int filedesc = open("/dev/fb0", O_RDONLY);
+    printf("Opened filedesc: %d\n", filedesc);
 
     void *readbuffer = (char*) malloc(1024);
 
     ssize_t bytesRead;
     if ((bytesRead = read(filedesc,readbuffer,1024)) < 0){
-        printf("Bytes read: %d", bytesRead);
+        printf("Bytes read: %d\n", (int) bytesRead);
         FAIL() << "Failed to read";
     }
 

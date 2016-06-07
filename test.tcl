@@ -9,9 +9,15 @@ if {[file isdirectory $TEST_EXE]} {
   exec $BUILD_SCRIPT_FILE
 }
 
-set result [exec $TEST_EXE]
-# display the results
-puts "$result"
+if { [catch {set result [exec $TEST_EXE]} reason] } {
+
+puts "Failed: $reason"
+
+} else {
+
+puts $result
+
+}
 
 proc searchResultsForPassed {result} {
     if {[lsearch -all -inline $result *PASSED*] >= 0} {

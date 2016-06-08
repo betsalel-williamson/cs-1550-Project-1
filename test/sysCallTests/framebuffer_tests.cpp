@@ -27,7 +27,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer) {
     mother::print_buffer(read_frame_buffer(BYTES_TO_READ, 0, 0), BYTES_TO_READ);
     ASSERT_EQ(bytesWritten, 1);
 
-    unsigned short writebuffer_size_5[5] = {0xff00,0xaa00,0xbb00,0xcc00,0xdd00};
+    unsigned short writebuffer_size_5[5] = {0xabcd,0xef01,0x2345,0x6789,0xabcd};
 
     bytesWritten = write_to_frame_buffer(writebuffer_size_5, 10);
 

@@ -5,7 +5,13 @@
 #ifndef PROJECT1_SYSCALLS_H
 #define PROJECT1_SYSCALLS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void init_graphics();// open, ioctl, mmap
+
+int open_frame_buffer(int);
 
 void exit_graphics();// ioctl
 
@@ -22,4 +28,9 @@ void draw_pixel(int x, int y, color_t color);
 void draw_rect(int x1, int y1, int width, int height, color_t c);
 
 void draw_text(int x, int y, const char *text, color_t c);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif //PROJECT1_SYSCALLS_H

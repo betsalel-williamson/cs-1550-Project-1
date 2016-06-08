@@ -1,12 +1,17 @@
 cmake_minimum_required(VERSION 2.8)
-project(Project1)
-enable_testing()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+include_directories(".")
 
-set(SOURCE_FILES main.c sysCall/syscalls.c sysCall/syscalls.c sysCall/syscalls.h)
-add_executable(Project1 ${SOURCE_FILES})
+add_subdirectory(lib)
+add_subdirectory(test)
+
+project(Main)
+
+include_directories(${SysCallLibs_SOURCE_DIR}/include
+        ${SysCallLibs_SOURCE_DIR})
+
+add_executable(${PROJECT_NAME} main.c)
+
+target_link_libraries(${PROJECT_NAME} SysCallLibs)
 
 
-add_subdirectory(sysCall)
-add_subdirectory(sysCall_tests)

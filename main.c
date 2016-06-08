@@ -3,11 +3,25 @@
 //
 
 #include <stdio.h>
-#include "sysCall/syscalls.h"
+#include "syscalls.h"
+
+void draw_sample();
 
 int main(int argc, char **argv) {
 
-    init_graphics();
-    puts("hello");
+    draw_sample();
+
     return 0;
+}
+
+void draw_sample() {
+    unsigned short buffer[2000] = {};
+    int i;
+    for (i = 0; i < 2000; ++i) {
+        buffer[i] = 0x9999;
+    }
+
+//    puts("\033[2J");
+
+    write_to_frame_buffer(buffer, 2000);
 }

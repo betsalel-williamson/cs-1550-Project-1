@@ -29,7 +29,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer) {
 
     int writebuffer_size_5[5] = {5,4,3,2,1};
 
-    bytesWritten = write_to_frame_buffer(writebuffer_size_5, 1);
+    bytesWritten = write_to_frame_buffer(writebuffer_size_5, 5);
 
     mother::print_buffer(read_frame_buffer(BYTES_TO_READ, 0, 0), BYTES_TO_READ);
     ASSERT_EQ(bytesWritten, 5);

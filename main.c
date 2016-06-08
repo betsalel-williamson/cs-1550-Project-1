@@ -9,7 +9,9 @@ int main(int argc, char **argv) {
 
     unsigned short buffer[1] = {0x0123};
 
-    write_to_frame_buffer(buffer, 1);
     puts("\033[2J");
+
+    write_to_frame_buffer(buffer, 1);
+
     return 0;
 }

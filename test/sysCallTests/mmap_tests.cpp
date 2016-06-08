@@ -8,16 +8,18 @@
 #include "gtest/gtest.h"
 #include "mother.h"
 
+#define BYTES_TO_READ 32
+
 TEST(BasicTest, Mmap_read) {
     int filedesc = open_frame_buffer(O_RDONLY);
 
-    size_t length = 128;
+    size_t length = BYTES_TO_READ;
     off_t offset = 0, pa_offset = 0;
 
     char * addr = (char *) mmap(NULL, length + offset - pa_offset, PROT_READ,
                                  MAP_SHARED, filedesc, pa_offset);
 
-    mother::print_buffer((unsigned char *) addr, 128);
+    mother::print_buffer((unsigned char *) addr, BYTES_TO_READ);
 }
 
 //TEST(BasicTest, Mmap_write) {

@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv) {
 
-    init_graphics();
+    write_to_frame_buffer({(unsigned short *) 0xffff}, 1);
     puts("hello");
     return 0;
 }

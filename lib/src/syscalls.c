@@ -4,14 +4,10 @@
 
 #include <fcntl.h>
 #include <sys/mman.h>
-#include <stdio.h>
 #include <unistd.h>
 #include "syscalls.h"
 
 void init_graphics() {
-
-    puts("Hello");
-
 }
 
 int open_frame_buffer(int options) {

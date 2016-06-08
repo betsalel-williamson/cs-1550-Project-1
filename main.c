@@ -8,7 +8,8 @@
 int main(int argc, char **argv) {
 
     unsigned short buffer[2000] = {};
-    for (int i = 0; i < 2000; ++i) {
+    int i;
+    for (i = 0; i < 2000; ++i) {
         buffer[i] = 0x9999;
     }
 

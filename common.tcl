@@ -2,7 +2,7 @@
 
 set BUILD_DIR _build
 
-set PROJECT_NAME Project1
+set PROJECT_NAME Main
 
 set BUILD_SCRIPT_FILE ./build.tcl
 

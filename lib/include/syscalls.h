@@ -15,6 +15,8 @@ int open_frame_buffer(int);
 
 unsigned char * read_frame_buffer(size_t buffer_size, off_t offset, off_t pa_offset);
 
+int write_to_frame_buffer(int *writebuffer, size_t num_bytes);
+
 void exit_graphics();// ioctl
 
 void clear_screen();// write

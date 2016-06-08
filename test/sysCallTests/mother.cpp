@@ -2,7 +2,7 @@
 // Created by School on 6/8/16.
 //
 
-#include <printf.h>
+#include <cstdio>
 #include "mother.h"
 
 void mother::print_buffer(unsigned char *buffer, int buffer_size) {

@@ -12,7 +12,7 @@
 
 TEST(BasicTest, Mmap_read) {
 
-    mother::print_buffer(read_frame_buffer(BYTES_TO_READ, 0, 0), BYTES_TO_READ);
+    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
 }
 
 //TEST(BasicTest, Mmap_write) {

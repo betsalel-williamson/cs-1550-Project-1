@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv) {
 
-    unsigned short buffer[1] = {0x0123};
+    unsigned short buffer[10] = {0x0123,0x0123,0x0123,0x0123,0x0123,0x0123,0x0123,0x0123,0x0123,0x0123};
 
     puts("\033[2J");
 

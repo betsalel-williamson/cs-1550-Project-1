@@ -20,13 +20,13 @@ TEST(BasicTest, Mmap_read) {
     mother::print_buffer((unsigned char *) addr, 128);
 }
 
-TEST(BasicTest, Mmap_write) {
-    EXPECT_EQ(true, true);
-}
-
-TEST(BasicTest, Mmap_read_and_write) {
-    EXPECT_EQ(true, true);
-}
+//TEST(BasicTest, Mmap_write) {
+//    EXPECT_EQ(true, true);
+//}
+//
+//TEST(BasicTest, Mmap_read_and_write) {
+//    EXPECT_EQ(true, true);
+//}
 
 //#define handle_error(msg) \
 //           do { perror(msg); exit(EXIT_FAILURE); } while (0)

@@ -12,3 +12,7 @@ void init_graphics() {
     puts("Hello");
 
 }
+
+int open_frame_buffer(int options) {
+    return open("/dev/fb0", options);
+}

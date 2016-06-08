@@ -3,7 +3,7 @@
 //
 
 #include <fcntl.h>
-#include <syscalls.h>
+#include "syscalls.h"
 #include "gtest/gtest.h"
 
 TEST(BasicTest, Open_zeroth_framebuffer) {

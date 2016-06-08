@@ -5,8 +5,8 @@ add_subdirectory(test)
 
 project(Main)
 
-include_directories(${lib_SOURCE_DIR}/include
-        ${lib_SOURCE_DIR})
+include_directories(${SysCallLibs_SOURCE_DIR}/include
+        ${SysCallLibs_SOURCE_DIR})
 
 add_executable(${PROJECT_NAME} main.c)
 

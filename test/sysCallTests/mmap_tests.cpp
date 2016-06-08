@@ -11,15 +11,8 @@
 #define BYTES_TO_READ 32
 
 TEST(BasicTest, Mmap_read) {
-    int filedesc = open_frame_buffer(O_RDONLY);
 
-    size_t length = BYTES_TO_READ;
-    off_t offset = 0, pa_offset = 0;
-
-    char * addr = (char *) mmap(NULL, length + offset - pa_offset, PROT_READ,
-                                 MAP_SHARED, filedesc, pa_offset);
-
-    mother::print_buffer((unsigned char *) addr, BYTES_TO_READ);
+    mother::print_buffer(read_frame_buffer(BYTES_TO_READ, 0, 0), BYTES_TO_READ);
 }
 
 //TEST(BasicTest, Mmap_write) {

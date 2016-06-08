@@ -32,24 +32,3 @@ TEST(BasicTest, Write_to_zeroth_framebuffer) {
     }
     ASSERT_EQ(bytesWritten, 1);
 }
-
-#define BUFFER_SIZE 32
-
-TEST(BasicTest, Read_from_zeroth_framebuffer) {
-    int filedesc = open_frame_buffer(O_RDONLY);
-    printf("Opened filedesc: %d\n", filedesc);
-
-    unsigned char *readbuffer = (unsigned char *) malloc(BUFFER_SIZE);
-
-    ssize_t bytesRead;
-    if ((bytesRead = read(filedesc, (void *) readbuffer, BUFFER_SIZE)) < 0) {
-        printf("Bytes read: %d\n", (int) bytesRead);
-        FAIL() << "Failed to read";
-    }
-
-    ASSERT_EQ(bytesRead, BUFFER_SIZE);
-    printf("Bytes read: %d\n", (int) bytesRead);
-
-    mother::print_buffer(readbuffer, BUFFER_SIZE);
-}
-

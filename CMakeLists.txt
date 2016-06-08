@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 add_subdirectory(lib)
 add_subdirectory(test)
+add_subdirectory(test/lib/googletest)
 
 project(Main)
 

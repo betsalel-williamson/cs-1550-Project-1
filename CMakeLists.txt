@@ -4,7 +4,6 @@ include_directories(".")
 
 add_subdirectory(lib)
 add_subdirectory(test)
-add_subdirectory(test/lib/googletest)
 
 project(Main)
 

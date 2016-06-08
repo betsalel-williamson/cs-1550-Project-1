@@ -8,6 +8,6 @@ set BUILD_SCRIPT_FILE ./build.tcl
 
 set TEST_SCRIPT_FILE ./test.tcl
 
-set TEST_EXE $BUILD_DIR/test/Test_project
+set TEST_EXE $BUILD_DIR/test/sysCallTests/RunBasicTest
 
 set MAIN_EXE $BUILD_DIR/$PROJECT_NAME

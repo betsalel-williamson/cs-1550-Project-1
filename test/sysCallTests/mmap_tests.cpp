@@ -2,19 +2,26 @@
 // Created by School on 6/7/16.
 //
 
+#include <fcntl.h>
+#include <sys/mman.h>
+#include "syscalls.h"
 #include "gtest/gtest.h"
+#include "mother.h"
+
+#define BYTES_TO_READ 32
 
 TEST(BasicTest, Mmap_read) {
-    EXPECT_EQ(true, true);
+
+    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
 }
 
-TEST(BasicTest, Mmap_write) {
-    EXPECT_EQ(true, true);
-}
-
-TEST(BasicTest, Mmap_read_and_write) {
-    EXPECT_EQ(true, true);
-}
+//TEST(BasicTest, Mmap_write) {
+//    EXPECT_EQ(true, true);
+//}
+//
+//TEST(BasicTest, Mmap_read_and_write) {
+//    EXPECT_EQ(true, true);
+//}
 
 //#define handle_error(msg) \
 //           do { perror(msg); exit(EXIT_FAILURE); } while (0)

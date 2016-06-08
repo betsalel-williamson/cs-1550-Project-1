@@ -5,60 +5,32 @@
 #include <fcntl.h>
 #include "syscalls.h"
 #include "gtest/gtest.h"
+#include "mother.h"
 
 TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work
 
     int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
+
     printf("Opened filedesc: %d\n", filedesc);
 
     ASSERT_GT(filedesc, 0);
 }
 
+#define BYTES_TO_READ 32
 TEST(BasicTest, Write_to_zeroth_framebuffer) {
 
-    int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
+    unsigned short writebuffer_size_1[1] = {0x0005};
 
-    if (filedesc < 0) {
-        FAIL() << "Failed to open";
-    }
+    ssize_t bytesWritten =  write_to_frame_buffer(writebuffer_size_1, 1);
 
-    int writebuffer[1] = {5};
-    ssize_t bytesWritten;
-
-    if ((bytesWritten = write(filedesc, (void *) writebuffer, 1)) != 1) {
-        FAIL() << "Failed to write";
-    }
+    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
     ASSERT_EQ(bytesWritten, 1);
-}
 
-#define BUFFER_SIZE 128
+    unsigned short writebuffer_size_5[5] = {0xabcd,0xef01,0x2345,0x6789,0xabcd};
 
-TEST(BasicTest, Read_from_zeroth_framebuffer) {
-    int filedesc = open_frame_buffer(O_RDONLY);
-    printf("Opened filedesc: %d\n", filedesc);
+    bytesWritten = write_to_frame_buffer(writebuffer_size_5, 10);
 
-    unsigned char *readbuffer = (unsigned char *) malloc(BUFFER_SIZE);
-
-    ssize_t bytesRead;
-    if ((bytesRead = read(filedesc, (void *) readbuffer, BUFFER_SIZE)) < 0) {
-        printf("Bytes read: %d\n", (int) bytesRead);
-        FAIL() << "Failed to read";
-    }
-
-    ASSERT_EQ(bytesRead, BUFFER_SIZE);
-    printf("Bytes read: %d\n", (int) bytesRead);
-
-    int ii;
-
-    // printf("0x"); -- uncomment if you want to start with "0x"
-
-    for (ii = 0; ii < BUFFER_SIZE; ii++) {
-        printf("%02x", (unsigned int) (readbuffer[ii]));
-        if (ii % 4 == 3) printf(" ");    // groups of 8: makes more readable
-        // uncomment if you want "all one line"
-        if (ii % 32 == 31) printf("\n"); // ditto
-    }
-
-    printf("\n");
+    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
+    ASSERT_EQ(bytesWritten, 10);
 }

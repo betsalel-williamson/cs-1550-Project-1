@@ -7,7 +7,9 @@
 
 int main(int argc, char **argv) {
 
-    write_to_frame_buffer({(unsigned short *) 0xffff}, 1);
+    unsigned short buffer[1] = {0xffff};
+
+    write_to_frame_buffer(buffer, 1);
     puts("hello");
     return 0;
 }

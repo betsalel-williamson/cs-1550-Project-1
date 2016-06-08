@@ -2,10 +2,22 @@
 // Created by School on 6/7/16.
 //
 
+#include <fcntl.h>
+#include <sys/mman.h>
+#include "syscalls.h"
 #include "gtest/gtest.h"
+#include "mother.h"
 
 TEST(BasicTest, Mmap_read) {
-    EXPECT_EQ(true, true);
+    int filedesc = open_frame_buffer(O_RDONLY);
+
+    size_t length = 128;
+    off_t offset = 0, pa_offset = 0;
+
+    char * addr = (char *) mmap(NULL, length + offset - pa_offset, PROT_READ,
+                                 MAP_SHARED, filedesc, pa_offset);
+
+    mother::print_buffer((unsigned char *) addr, 128);
 }
 
 TEST(BasicTest, Mmap_write) {

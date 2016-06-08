@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include "syscalls.h"
 #include "gtest/gtest.h"
+#include "mother.h"
 
 TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work
@@ -49,16 +50,6 @@ TEST(BasicTest, Read_from_zeroth_framebuffer) {
     ASSERT_EQ(bytesRead, BUFFER_SIZE);
     printf("Bytes read: %d\n", (int) bytesRead);
 
-    int ii;
-
-    // printf("0x"); -- uncomment if you want to start with "0x"
-
-    for (ii = 0; ii < BUFFER_SIZE; ii++) {
-        printf("%02x", (unsigned int) (readbuffer[ii]));
-        if (ii % 4 == 3) printf(" ");    // groups of 8: makes more readable
-        // uncomment if you want "all one line"
-        if (ii % 32 == 31) printf("\n"); // ditto
-    }
-
-    printf("\n");
+    mother::print_buffer(readbuffer, BUFFER_SIZE);
 }
+

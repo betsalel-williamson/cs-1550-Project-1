@@ -18,7 +18,7 @@ int open_frame_buffer(int options) {
     return open("/dev/fb0", options);
 }
 
-int write_to_frame_buffer(int *writebuffer, size_t num_bytes) {
+int write_to_frame_buffer(int *write_buffer, size_t num_bytes) {
 
     int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
 
@@ -26,7 +26,7 @@ int write_to_frame_buffer(int *writebuffer, size_t num_bytes) {
 
     if (filedesc >= 0) {
 
-        if ((write(filedesc, (void *) writebuffer, num_bytes)) != num_bytes) {
+        if ((write(filedesc, (void *) write_buffer, num_bytes)) != num_bytes) {
             output = -1;
         } else {
             output = (int) num_bytes;

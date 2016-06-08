@@ -3,8 +3,8 @@
 //
 
 #include <fcntl.h>
+#include <syscalls.h>
 #include "gtest/gtest.h"
-#include "../../sysCall/include/syscalls.h"
 
 TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work

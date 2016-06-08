@@ -20,14 +20,14 @@ TEST(BasicTest, Open_zeroth_framebuffer) {
 #define BYTES_TO_READ 32
 TEST(BasicTest, Write_to_zeroth_framebuffer) {
 
-    int writebuffer_size_1[1] = {5};
+    unsigned short writebuffer_size_1[1] = {5};
 
     ssize_t bytesWritten =  write_to_frame_buffer(writebuffer_size_1, 1);
 
     mother::print_buffer(read_frame_buffer(BYTES_TO_READ, 0, 0), BYTES_TO_READ);
     ASSERT_EQ(bytesWritten, 1);
 
-    int writebuffer_size_5[5] = {0x0005,0x0004,0x0003,0x0002,0x0001};
+    unsigned short writebuffer_size_5[5] = {0xff,0xaa,0xbb,0xcc,0xdd};
 
     bytesWritten = write_to_frame_buffer(writebuffer_size_5, 5);
 

@@ -32,14 +32,14 @@ int main(int argc, char **argv) {
 
     init_graphics();
 
-//    draw_sample_colors();
+    draw_sample_colors();
 
     exit_graphics();
 
     exit(EXIT_SUCCESS);
 }
 
-# define SAMPLE_BUFFER_SIZE 2000
+# define SAMPLE_BUFFER_SIZE 1280*240
 void draw_sample() {
     unsigned short buffer[SAMPLE_BUFFER_SIZE] = {};
     int i;

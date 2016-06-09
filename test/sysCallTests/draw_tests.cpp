@@ -25,17 +25,17 @@ TEST(DrawTests, Draw_white_pixel) {
 
 
 TEST(DrawTests, Get_address_from_x_y) {
-    ASSERT_EQ(get_address_from_x_y(0,0),0);
+    ASSERT_EQ(0, get_address_from_x_y(0,0));
 
-    ASSERT_EQ(get_address_from_x_y(639,0),639);
+    ASSERT_EQ(639, get_address_from_x_y(639,0));
 
-    ASSERT_EQ(get_address_from_x_y(640,0),-1);
+    ASSERT_EQ(-1, get_address_from_x_y(640,0));
 
-    ASSERT_EQ(get_address_from_x_y(0,1),640);
+    ASSERT_EQ(640, get_address_from_x_y(0,1));
 
-    ASSERT_EQ(get_address_from_x_y(0,479),480*640);
+    ASSERT_EQ(480*640, get_address_from_x_y(0,479));
 
-    ASSERT_EQ(get_address_from_x_y(0,480),-1);
+    ASSERT_EQ(-1, get_address_from_x_y(0,480));
 
 }
 

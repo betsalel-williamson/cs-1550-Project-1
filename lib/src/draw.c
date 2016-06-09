@@ -6,16 +6,18 @@
 #include "syscalls.h"
 
 void draw_pixel(int x, int y, color_t color) {
-    unsigned char * fb = get_frame_buffer();
+    int horizontal = x, vertical = y;
 
-    int address = get_address_from_x_y(x,y);
+    unsigned char *fb = get_frame_buffer();
+
+    int address = get_address_from_x_y(horizontal, vertical);
 
     fb[address] = (unsigned char) color;
 }
 
 
-int get_address_from_x_y(int x, int y) {
-    return (int) (x + (y * get_horizontal_screen_size()));
+int get_address_from_x_y(int horizontal, int vertical) {
+    return (int) (vertical + (horizontal * get_horizontal_screen_size()));
 }
 
 void draw_rect(int x1, int y1, int width, int height, color_t c) {

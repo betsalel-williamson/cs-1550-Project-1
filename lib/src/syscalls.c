@@ -34,7 +34,7 @@ size_t get_horizontal_screen_size() {
     int fd = -1;
     int r = 1;
 
-    fd = open("/dev/fb0", O_RDONLY);
+    fd = open_frame_buffer(O_RDWR);
     if (fd >= 0) {
         if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
             buflen = fixed_info.line_length;
@@ -61,7 +61,7 @@ size_t get_vertical_screen_size() {
     int fd = -1;
     int r = 1;
 
-    fd = open("/dev/fb0", O_RDONLY);
+    fd = open_frame_buffer(O_RDWR);
     if (fd >= 0) {
         if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
             buflen = screen_info.yres_virtual;

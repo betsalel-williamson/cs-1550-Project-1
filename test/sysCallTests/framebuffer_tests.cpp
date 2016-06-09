@@ -22,16 +22,17 @@ TEST(BasicTest, Open_zeroth_framebuffer) {
 }
 
 #define BYTES_TO_READ 32
+
 TEST(BasicTest, Write_to_zeroth_framebuffer) {
 
     unsigned short writebuffer_size_1[1] = {0x0005};
 
-    ssize_t bytesWritten =  write_to_frame_buffer(writebuffer_size_1, 1);
+    ssize_t bytesWritten = write_to_frame_buffer(writebuffer_size_1, 1);
 
     mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
     ASSERT_EQ(bytesWritten, 1);
 
-    unsigned short writebuffer_size_5[5] = {0xabcd,0xef01,0x2345,0x6789,0xabcd};
+    unsigned short writebuffer_size_5[5] = {0xabcd, 0xef01, 0x2345, 0x6789, 0xabcd};
 
     bytesWritten = write_to_frame_buffer(writebuffer_size_5, 10);
 
@@ -61,7 +62,7 @@ TEST(BasicTest, Get_screen_size) {
 //                          0);
 //            if (buffer != MAP_FAILED)
 //            {
-            puts((const char *) buflen);
+            printf("%d", (int) buflen);
 //                /*
 //                 * TODO: something interesting here.
 //                 * "buffer" now points to screen pixels.

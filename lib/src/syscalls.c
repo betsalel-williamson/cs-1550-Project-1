@@ -6,6 +6,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <time.h>
 #include "syscalls.h"
 
 void init_graphics() {
@@ -47,4 +48,8 @@ unsigned char *read_frame_buffer(size_t buffer_size) {
     int fd = open_frame_buffer(O_RDONLY);
 
     return read_frame_buffer_with_offset(buffer_size,0,0);
+}
+
+void sleep_ms(long ms){
+    nanosleep((const struct timespec *) (ms * 1000000), NULL);
 }

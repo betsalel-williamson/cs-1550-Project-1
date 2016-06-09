@@ -37,6 +37,8 @@ void draw_sample_colors() {
         buffer[i] = Black;
     }
 
+    sleep_ms(500);
+
     write_to_frame_buffer(buffer, SAMPLE_COLOR_BUFFER_SIZE);
     for (i = 0; i < SAMPLE_COLOR_BUFFER_SIZE; ++i) {
         buffer[i] = Navy;

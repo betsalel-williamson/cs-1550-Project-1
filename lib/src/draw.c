@@ -6,24 +6,16 @@
 #include "draw.h"
 #include "syscalls.h"
 
-static unsigned char *_fb = NULL;
-
 void draw_pixel(int x, int y, color_t color) {
     int horizontal = x, vertical = y;
     unsigned char *fb;
 
-    if (_fb == NULL) {
-        fb = get_frame_buffer();
-    } else {
-        fb = _fb;
-    }
+    fb = get_frame_buffer();
 
     int address = get_address_from_x_y(horizontal, vertical);
 
     fb[address] = (unsigned char) color;
     fb[address + 1] = (unsigned char) color >> 8;
-
-
 }
 
 

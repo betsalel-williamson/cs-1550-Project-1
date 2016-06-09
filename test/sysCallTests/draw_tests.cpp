@@ -32,8 +32,8 @@ TEST(DrawTests, Draw_blue_pixel) {
     // then pixel is drawn, reading framebuffer will show that something was drawn
     unsigned char * buffer = read_frame_buffer(2);
 
-    ASSERT_EQ(0x00, buffer[0]);
-    ASSERT_EQ(0x1f, buffer[1]);
+    ASSERT_EQ(0x1f, buffer[0]);
+    ASSERT_EQ(0x00, buffer[1]);
 }
 
 

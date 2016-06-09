@@ -2,11 +2,29 @@
 // Created by School on 6/9/16.
 //
 
+#include <lib/include/draw.h>
 #include "syscalls.h"
 #include "color.h"
 
+void color_whole_screen(color_t color) {
+    int h = (int) get_horizontal_screen_size(), v = (int) get_vertical_screen_size();
+    int x;
+    for (x = 0; x < h; ++x) {
+        int y;
+        for (y = 0; y < v; ++y) {
+            draw_pixel(x, y, color);
+        }
+    }
+
+    sleep_ms(1500);
+}
+
 #define SAMPLE_COLOR_BUFFER_SIZE (int) 1280*480
+
 void draw_sample_colors() {
+
+    color_whole_screen(White);
+
     unsigned short buffer[SAMPLE_COLOR_BUFFER_SIZE] = {};
     int i;
     for (i = 0; i < SAMPLE_COLOR_BUFFER_SIZE; ++i) {

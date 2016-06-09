@@ -12,22 +12,19 @@ void draw_sample();
 void draw_sample_colors();
 
 /**
- * Handle CTR-C for quit to correctly close down the server's socket.
+ * Handle quit to correctly exit and restore state on CTR-C.
  */
 void sig_handler(int signo) {
+    printf("\n\nProcessing received signal: %d\n", signo);
 
     exit_graphics();
+
+    if (signo == SIGINT)
+    {
+        exit(EXIT_SUCCESS);
+    }
+    // else
     exit(EXIT_FAILURE);
-//    printf("\n\nProcessing received signal: %d\n", signo);
-//
-//    if (signo == SIGINT)
-//    {
-//        exit_graphics();
-//
-//        exit(EXIT_SUCCESS);
-//    } else {
-//        exit_graphics();
-//    }
 }
 
 int main(int argc, char **argv) {

@@ -37,7 +37,7 @@ int get_address_from_x_y(int horizontal, int vertical) {
 
     address += horizontal;
 
-    address += vertical * get_horizontal_screen_size();
+    address += (vertical-1) * get_horizontal_screen_size();
 
     // revert to index logic
     address -= 1;

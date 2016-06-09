@@ -25,14 +25,14 @@ int main(int argc, char** argv)
 	do
 	{
 		//draw a black rectangle to erase the old one
-		draw_rect(x, y, 20, 20, 0);
+		draw_rect(x, y, 20, 20, Black);
 		key = getkey();
 		if(key == 'w') y-=10;
 		else if(key == 's') y+=10;
 		else if(key == 'a') x-=10;
 		else if(key == 'd') x+=10;
 		//draw a blue rectangle
-		draw_rect(x, y, 20, 20, 15);
+		draw_rect(x, y, 20, 20, Blue);
 		sleep_ms(20);
 	} while(key != 'q');
 

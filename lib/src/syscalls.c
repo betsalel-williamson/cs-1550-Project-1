@@ -25,105 +25,79 @@ struct singleton {
     int flags;
     int fildes;
     off_t off;
+    size_t horizontal;
+    size_t vertical;
 };
 
 struct singleton *get_instance() {
     static struct singleton *instance = NULL;
 
     if (instance == NULL) {
+
+        // get map for struct
         instance = mmap(NULL, sizeof(struct singleton), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
         int fd = open_frame_buffer(O_RDWR);
         instance->prot = PROT_READ | PROT_WRITE;
         instance->flags = MAP_SHARED;
-        instance->len = get_screen_size();
+
+        // get horizontal and vertical
+        struct fb_fix_screeninfo fixed_info;
+        struct fb_var_screeninfo screen_info;
+
+        if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
+            instance->horizontal = fixed_info.line_length;
+        }
+        else {
+            perror("open");
+        }
+
+        if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
+            instance->vertical = screen_info.yres_virtual;
+        }
+        else {
+            perror("open");
+        }
+
+        instance->len = instance->horizontal * instance->vertical;
+
         instance->frame_buffer = mmap(NULL, instance->len,
                                       instance->prot,
                                       instance->flags, fd, 0);
-        close(fd);
+
+        if (close(fd) != 0) {
+            // swallow error
+        }
     }
 
     return instance;
 }
 
+void destruct_instance(struct singleton *pSingleton);
+
 void init_graphics() {
     clear_screen();
+    get_instance();
 }
 
 size_t get_screen_size() {
-
-    return get_horizontal_screen_size() * get_vertical_screen_size();
+    return get_instance()->len;
 }
-
-static size_t _h = (size_t) -1;
 
 size_t get_horizontal_screen_size() {
-    size_t buflen = (size_t) -1;
-    if (_h == -1) {
-        struct fb_fix_screeninfo fixed_info;
-        char *buffer = NULL;
-
-        int fd = -1;
-        int r = 1;
-
-        fd = open_frame_buffer(O_RDWR);
-        if (fd >= 0) {
-            if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
-                buflen = fixed_info.line_length;
-            }
-            else {
-                perror("open");
-            }
-
-            if (fd >= 0) {
-                if (close(fd) != 0) {
-                    buflen = (size_t) -1;
-                }
-            }
-
-        }
-    } else {
-        buflen = _h;
-    }
-
-    return buflen;
+    return get_instance()->horizontal;
 }
 
-static size_t _v = (size_t) -1;
-
 size_t get_vertical_screen_size() {
-    size_t buflen = (size_t) -1;
-
-    if (_v == -1) {
-        struct fb_var_screeninfo screen_info;
-        char *buffer = NULL;
-
-        int fd = -1;
-        int r = 1;
-
-        fd = open_frame_buffer(O_RDWR);
-        if (fd >= 0) {
-            if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
-                buflen = screen_info.yres_virtual;
-            }
-            else {
-                perror("open");
-            }
-
-            if (fd >= 0) {
-                if (close(fd) != 0) {
-                    buflen = (size_t) -1;
-                }
-            }
-        }
-    } else {
-        buflen = _v;
-    }
-
-    return buflen;
+    return get_instance()->vertical;
 }
 
 void exit_graphics() {
     clear_screen();
+    destruct_instance(get_instance());
+}
+
+void destruct_instance(struct singleton *pSingleton) {
+    // unmap memory
 }
 
 int open_frame_buffer(int options) {

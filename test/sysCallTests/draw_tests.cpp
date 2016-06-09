@@ -17,8 +17,8 @@ TEST(DrawTests, Draw_pixel) {
     mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
 
     // then pixel is drawn, reading framebuffer will show that something was drawn
-    unsigned short * buffer = read_frame_buffer(2);
+    unsigned char * buffer = read_frame_buffer(2);
 
-
-    ASSERT_EQ(0xffff, buffer[0]);
+    ASSERT_EQ(0xff, buffer[0]);
+    ASSERT_EQ(0xff, buffer[1]);
 }

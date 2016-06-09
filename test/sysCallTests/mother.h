@@ -9,7 +9,7 @@
 class mother {
 
 public:
-    static void print_buffer(unsigned short * buffer, int buffer_size);
+    static void print_buffer(unsigned char * buffer, int buffer_size);
 };
 
 

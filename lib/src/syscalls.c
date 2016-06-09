@@ -25,7 +25,7 @@ size_t get_screen_size() {
     return get_horizontal_screen_size() * get_vertical_screen_size();
 }
 
-size_t _h = (size_t) -1;
+static size_t _h = (size_t) -1;
 
 size_t get_horizontal_screen_size() {
     size_t buflen = (size_t) -1;
@@ -56,7 +56,7 @@ size_t get_horizontal_screen_size() {
     return buflen;
 }
 
-size_t _v = (size_t) -1;
+static size_t _v = (size_t) -1;
 
 size_t get_vertical_screen_size() {
     size_t buflen = (size_t) -1;

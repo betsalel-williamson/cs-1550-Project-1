@@ -35,3 +35,11 @@ TEST(DrawTests, Draw_blue_pixel) {
     ASSERT_EQ(0x00, buffer[0]);
     ASSERT_EQ(0x1f, buffer[1]);
 }
+
+
+TEST(DrawTests, Color_whole_screen_test) {
+
+    color_whole_screen(White);
+
+}
+

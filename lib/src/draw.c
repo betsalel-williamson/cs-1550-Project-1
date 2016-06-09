@@ -5,7 +5,7 @@
 #include "draw.h"
 #include "syscalls.h"
 
-unsigned char *_fb = (unsigned char *) -1;
+static unsigned char *_fb = (unsigned char *) -1;
 
 void draw_pixel(int x, int y, color_t color) {
     int horizontal = x, vertical = y;

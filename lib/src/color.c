@@ -23,8 +23,6 @@ void color_whole_screen(color_t color) {
 
 void draw_sample_colors() {
 
-    color_whole_screen(White);
-
     unsigned short buffer[SAMPLE_COLOR_BUFFER_SIZE] = {};
     int i;
     for (i = 0; i < SAMPLE_COLOR_BUFFER_SIZE; ++i) {

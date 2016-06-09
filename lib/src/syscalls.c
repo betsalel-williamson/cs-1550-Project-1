@@ -159,3 +159,8 @@ void clear_screen() {
     syscall(4, STDOUT_FILENO, msg, sizeof(msg) - 1);
 }
 
+
+char getkey(){
+    return 'a';
+};
+

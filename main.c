@@ -54,7 +54,7 @@ void draw_sample() {
 }
 
 
-# define SAMPLE_COLOR_BUFFER_SIZE 32768
+# define SAMPLE_COLOR_BUFFER_SIZE 1280*240
 void draw_sample_colors() {
     unsigned short buffer[SAMPLE_COLOR_BUFFER_SIZE] = {};
     int i;

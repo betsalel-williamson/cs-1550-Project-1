@@ -17,7 +17,7 @@ void draw_sample_colors();
 void sig_handler(int signo) {
     printf("\n\nProcessing received signal: %d\n", signo);
 
-    if (signo == SIGINT)
+    if (signo > 0)
     {
         exit_graphics();
         exit(EXIT_SUCCESS);

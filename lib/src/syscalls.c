@@ -17,8 +17,11 @@
 #define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
 
 void init_graphics() {
-
     clear_screen();
+}
+
+int get_screen_size() {
+
 }
 
 void exit_graphics() {
@@ -48,6 +51,8 @@ int write_to_frame_buffer(unsigned short *write_buffer, size_t num_bytes) {
 
     sleep_ms(MS_TO_SLEEP);
 
+    close(filedesc);
+
     return output;
 }
 
@@ -68,12 +73,15 @@ unsigned char *read_frame_buffer(size_t buffer_size) {
 
 // implementation from http://cc.byexamples.com/2007/05/25/nanosleep-is-better-than-sleep-and-usleep/
 void sleep_ms(long ms) {
-    struct timespec req = {0};
+    struct timespec request = {0};
+
     time_t sec = (int) (ms / 1000);
     ms = ms - (sec * 1000);
-    req.tv_sec = sec;
-    req.tv_nsec = ms * 1000000L;
-    while (nanosleep(&req, &req) == -1 && errno == EINTR)
+
+    request.tv_sec = sec;
+    request.tv_nsec = ms * 1000000L;
+
+    while (nanosleep(&request, &request) == -1 && errno == EINTR)
         continue;
 }
 

@@ -2,6 +2,7 @@
 // Created by School on 6/8/16.
 //
 
+#include "color.h"
 #include "gtest/gtest.h"
 #include "syscalls.h"
 

@@ -25,7 +25,7 @@ link_directories(${SysCallLibs_BINARY_DIR}/src)
 # Project_1 libraries.  We build them using more strict warnings than what
 # are used for other targets, to ensure that gtest can be compiled by a user
 # aggressive about warnings.
-add_library(SysCallLibs STATIC src/syscalls.c)
+add_library(SysCallLibs STATIC src/syscalls.c src/draw.c include/draw.h src/color.c include/color.h)
 SET_TARGET_PROPERTIES(SysCallLibs PROPERTIES LINKER_LANGUAGE C)
 
 #cxx_library(Project_1_lib "${cxx_strict}" src/syscalls.c)

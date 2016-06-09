@@ -9,15 +9,23 @@ if {[file isdirectory $TEST_EXE]} {
   exec $BUILD_SCRIPT_FILE
 }
 
+set chan [open test.log a]
+set timestamp [clock format [clock seconds]]
+puts $chan "$timestamp\n"
+
 if { [catch {set result [exec $TEST_EXE]} reason] } {
 
-puts "Failed: $reason"
+puts $chan "Failed: $reason"
 
 } else {
 
-puts $result
+puts $chan "$result"
 
 }
+
+puts $chan "\n\n"
+
+close $chan
 
 proc searchResultsForPassed {result} {
     if {[lsearch -all -inline $result *PASSED*] >= 0} {

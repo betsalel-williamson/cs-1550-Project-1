@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+#include <sys/types.h>
+
 void init_graphics();// open, ioctl, mmap
 
 int get_screen_size();

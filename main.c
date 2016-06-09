@@ -6,11 +6,11 @@
 #include "syscalls.h"
 
 void draw_sample();
-void draw_sample_colors();
+void draw_sample_colors(int ms_to_sleep);
 
 int main(int argc, char **argv) {
 
-    draw_sample_colors();
+    draw_sample_colors(700);
 
     return 0;
 }
@@ -30,14 +30,12 @@ void draw_sample() {
 
 
 # define SAMPLE_COLOR_BUFFER_SIZE 2048
-void draw_sample_colors() {
+void draw_sample_colors(int ms_to_sleep) {
     unsigned short buffer[SAMPLE_COLOR_BUFFER_SIZE] = {};
     int i;
     for (i = 0; i < SAMPLE_COLOR_BUFFER_SIZE; ++i) {
         buffer[i] = Black;
     }
-
-    sleep_ms(500);
 
     write_to_frame_buffer(buffer, SAMPLE_COLOR_BUFFER_SIZE);
     for (i = 0; i < SAMPLE_COLOR_BUFFER_SIZE; ++i) {

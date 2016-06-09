@@ -17,6 +17,7 @@ int open_frame_buffer(int options) {
     return open("/dev/fb0", options);
 }
 
+#define MS_TO_SLEEP 700
 int write_to_frame_buffer(unsigned short *write_buffer, size_t num_bytes) {
 
     int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
@@ -31,6 +32,8 @@ int write_to_frame_buffer(unsigned short *write_buffer, size_t num_bytes) {
             output = (int) num_bytes;
         }
     }
+
+    sleep_ms(MS_TO_SLEEP);
 
     return output;
 }

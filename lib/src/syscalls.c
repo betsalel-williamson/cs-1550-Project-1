@@ -25,54 +25,64 @@ size_t get_screen_size() {
     return get_horizontal_screen_size() * get_vertical_screen_size();
 }
 
+size_t _h = (size_t) -1;
 
 size_t get_horizontal_screen_size() {
     size_t buflen = (size_t) -1;
-    struct fb_fix_screeninfo fixed_info;
-    char *buffer = NULL;
+    if (_h == -1) {
+        struct fb_fix_screeninfo fixed_info;
+        char *buffer = NULL;
 
-    int fd = -1;
-    int r = 1;
+        int fd = -1;
+        int r = 1;
 
-    fd = open_frame_buffer(O_RDWR);
-    if (fd >= 0) {
-        if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
-            buflen = fixed_info.line_length;
+        fd = open_frame_buffer(O_RDWR);
+        if (fd >= 0) {
+            if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
+                buflen = fixed_info.line_length;
+            }
+            else {
+                perror("open");
+            }
+
+            if (fd >= 0)
+                close(fd);
+
         }
-        else {
-            perror("open");
-        }
-
-        if (fd >= 0)
-            close(fd);
-
+    } else {
+        buflen = _h;
     }
 
     return buflen;
 }
 
+size_t _v = (size_t) -1;
 
 size_t get_vertical_screen_size() {
     size_t buflen = (size_t) -1;
 
-    struct fb_var_screeninfo screen_info;
-    char *buffer = NULL;
+    if (_v == -1) {
+        struct fb_var_screeninfo screen_info;
+        char *buffer = NULL;
 
-    int fd = -1;
-    int r = 1;
+        int fd = -1;
+        int r = 1;
 
-    fd = open_frame_buffer(O_RDWR);
-    if (fd >= 0) {
-        if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
-            buflen = screen_info.yres_virtual;
+        fd = open_frame_buffer(O_RDWR);
+        if (fd >= 0) {
+            if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
+                buflen = screen_info.yres_virtual;
+            }
+            else {
+                perror("open");
+            }
+
+            if (fd >= 0)
+                close(fd);
+
         }
-        else {
-            perror("open");
-        }
-
-        if (fd >= 0)
-            close(fd);
-
+    } else {
+        buflen = _v;
     }
 
     return buflen;

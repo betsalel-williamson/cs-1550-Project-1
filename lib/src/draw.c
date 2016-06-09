@@ -5,16 +5,16 @@
 #include "draw.h"
 #include "syscalls.h"
 
-unsigned char *frame_buffer = (unsigned char *) -1;
+unsigned char *_fb = (unsigned char *) -1;
 
 void draw_pixel(int x, int y, color_t color) {
     int horizontal = x, vertical = y;
     unsigned char *fb;
 
-    if (frame_buffer == (unsigned char *) -1) {
+    if (_fb == (unsigned char *) -1) {
         fb = get_frame_buffer();
     } else {
-        fb = frame_buffer;
+        fb = _fb;
     }
 
     int address = get_address_from_x_y(horizontal, vertical);

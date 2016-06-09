@@ -42,7 +42,7 @@ TEST(BasicTest, Write_to_zeroth_framebuffer) {
 
 TEST(BasicTest, Get_screen_size) {
 
-    int x = get_screen_size();
+    size_t x = get_screen_size();
 
     struct fb_var_screeninfo screen_info;
     struct fb_fix_screeninfo fixed_info;
@@ -68,4 +68,6 @@ TEST(BasicTest, Get_screen_size) {
             close(fd);
 
     }
+
+    ASSERT_EQ(x, buflen);
 }

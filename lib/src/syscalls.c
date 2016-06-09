@@ -20,8 +20,62 @@ void init_graphics() {
     clear_screen();
 }
 
-int get_screen_size() {
+size_t get_screen_size() {
 
+    return get_horizontal_screen_size() * get_vertical_screen_size();
+}
+
+
+size_t get_horizontal_screen_size() {
+    size_t buflen = (size_t) -1;
+    struct fb_fix_screeninfo fixed_info;
+    char *buffer = NULL;
+
+    int fd = -1;
+    int r = 1;
+
+    fd = open("/dev/fb0", O_RDONLY);
+    if (fd >= 0) {
+        if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
+            buflen = fixed_info.line_length;
+        }
+        else {
+            perror("open");
+        }
+
+        if (fd >= 0)
+            close(fd);
+
+    }
+
+    return buflen;
+}
+
+
+size_t get_vertical_screen_size() {
+    size_t buflen = (size_t) -1;
+
+    struct fb_var_screeninfo screen_info;
+    char *buffer = NULL;
+
+    int fd = -1;
+    int r = 1;
+
+    fd = open("/dev/fb0", O_RDONLY);
+    if (fd >= 0) {
+        if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
+            buflen = screen_info.yres_virtual;
+        }
+        else {
+            perror("open");
+        }
+
+        if (fd >= 0)
+            close(fd);
+
+    }
+
+    return buflen;
 }
 
 void exit_graphics() {
@@ -56,8 +110,6 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
     return output;
 }
 
-unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset);
-
 unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
     int fd = open_frame_buffer(O_RDONLY);
 
@@ -66,9 +118,16 @@ unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, o
 }
 
 unsigned char *read_frame_buffer(size_t buffer_size) {
-    int fd = open_frame_buffer(O_RDONLY);
 
     return read_frame_buffer_with_offset(buffer_size, 0, 0);
+}
+
+
+unsigned char *get_frame_buffer() {
+    int fd = open_frame_buffer(O_RDWR);
+    size_t screen_size = get_screen_size();
+    return mmap(NULL, screen_size, PROT_READ,
+                MAP_SHARED, fd, 0);
 }
 
 // implementation from http://cc.byexamples.com/2007/05/25/nanosleep-is-better-than-sleep-and-usleep/

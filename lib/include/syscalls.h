@@ -13,9 +13,14 @@ extern "C" {
 
 void init_graphics();// open, ioctl, mmap
 
-int get_screen_size();
+size_t get_screen_size();
+size_t get_horizontal_screen_size();
+size_t get_vertical_screen_size();
+
 
 int open_frame_buffer(int);
+
+unsigned char *get_frame_buffer();
 
 unsigned char *read_frame_buffer(size_t buffer_size);
 

@@ -12,6 +12,7 @@ extern "C" {
 #endif
 
 void draw_pixel(int x, int y, color_t color);
+int get_address_from_x_y(int x, int y);
 
 void draw_rect(int x1, int y1, int width, int height, color_t c);
 

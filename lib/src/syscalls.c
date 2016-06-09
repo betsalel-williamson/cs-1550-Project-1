@@ -65,3 +65,9 @@ void sleep_ms(long ms) {
     while (nanosleep(&req, &req) == -1 && errno == EINTR)
         continue;
 }
+
+void clear_screen(){
+    const char msg[] = "\033[2J";
+    syscall(4, STDOUT_FILENO, msg, sizeof(msg)-1);
+}
+

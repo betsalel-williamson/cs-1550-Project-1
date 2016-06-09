@@ -18,7 +18,7 @@ void draw_sample() {
     unsigned short buffer[2000] = {};
     int i;
     for (i = 0; i < 2000; ++i) {
-        buffer[i] = 0x9999;
+        buffer[i] = rgb(255, 255, 255);
     }
 
 //    puts("\033[2J");

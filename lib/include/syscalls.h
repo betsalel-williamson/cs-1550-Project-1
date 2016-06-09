@@ -27,6 +27,8 @@ char getkey();// select, read
 
 void sleep_ms(long ms);// nanosleep
 
+#define rgb(r,g,b) ((((31*(r+4))/255)<<11) | (((63*(g+2))/255)<<5) | ((31*(b+4))/255))
+
 typedef unsigned short color_t;
 
 void draw_pixel(int x, int y, color_t color);

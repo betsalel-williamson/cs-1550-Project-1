@@ -5,9 +5,11 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <stdint.h>
 #include "syscalls.h"
 
 void init_graphics() {
+    //
 }
 
 int open_frame_buffer(int options) {

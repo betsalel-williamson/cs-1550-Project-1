@@ -42,7 +42,7 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
 
     if (filedesc >= 0) {
 
-        if ((write(filedesc, (void *) write_buffer, num_bytes)) != num_bytes) {
+        if ((write(filedesc, (void *) write_buffer, (size_t) num_bytes)) != num_bytes) {
             output = -1;
         } else {
             output = (int) num_bytes;

@@ -110,20 +110,20 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
     return output;
 }
 
-unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
+unsigned short *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
     int fd = open_frame_buffer(O_RDONLY);
 
     return mmap(NULL, buffer_size + offset - pa_offset, PROT_READ,
                 MAP_SHARED, fd, pa_offset);
 }
 
-unsigned char *read_frame_buffer(size_t buffer_size) {
+unsigned short *read_frame_buffer(size_t buffer_size) {
 
     return read_frame_buffer_with_offset(buffer_size, 0, 0);
 }
 
 
-unsigned char *get_frame_buffer() {
+unsigned short *get_frame_buffer() {
     int fd = open_frame_buffer(O_RDWR);
     size_t screen_size = get_screen_size();
     return mmap(NULL, screen_size, PROT_READ | PROT_WRITE,

@@ -8,7 +8,7 @@
 void draw_pixel(int x, int y, color_t color) {
     int horizontal = x, vertical = y;
 
-    unsigned char *fb = get_frame_buffer();
+    unsigned short *fb = get_frame_buffer();
 
     int address = get_address_from_x_y(horizontal, vertical);
 

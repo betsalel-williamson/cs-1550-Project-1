@@ -108,3 +108,4 @@ TEST(BasicTest, Get_screen_size) {
 
 //    ioctl(FBIOGET_VSCREENINFO);
     }
+}

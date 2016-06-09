@@ -5,7 +5,7 @@ include_directories(${gtest_SOURCE_DIR}/include
 
 add_executable(RunBasicTest
         framebuffer_tests.cpp
-        mmap_tests.cpp mother.cpp)
+        mmap_tests.cpp mother.cpp color_tests.cpp color_tests.h)
 
 target_link_libraries(RunBasicTest SysCallLibs gtest gtest_main)
 

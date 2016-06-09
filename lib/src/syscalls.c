@@ -31,25 +31,25 @@ void init_graphics() {
             !ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info))
         {
             buflen = screen_info.yres_virtual * fixed_info.line_length;
-            buffer = mmap(NULL,
-                          buflen,
-                          PROT_READ|PROT_WRITE,
-                          MAP_SHARED,
-                          fd,
-                          0);
-            if (buffer != MAP_FAILED)
-            {
-                puts((const char *) buflen);
-                /*
-                 * TODO: something interesting here.
-                 * "buffer" now points to screen pixels.
-                 * Each individual pixel might be at:
-                 *    buffer + x * screen_info.bits_per_pixel/8
-                 *           + y * fixed_info.line_length
-                 * Then you can write pixels at locations such as that.
-                 */
-
-                r = 0;   /* Indicate success */
+//            buffer = mmap(NULL,
+//                          buflen,
+//                          PROT_READ|PROT_WRITE,
+//                          MAP_SHARED,
+//                          fd,
+//                          0);
+//            if (buffer != MAP_FAILED)
+//            {
+//                puts((const char *) buflen);
+//                /*
+//                 * TODO: something interesting here.
+//                 * "buffer" now points to screen pixels.
+//                 * Each individual pixel might be at:
+//                 *    buffer + x * screen_info.bits_per_pixel/8
+//                 *           + y * fixed_info.line_length
+//                 * Then you can write pixels at locations such as that.
+//                 */
+//
+//                r = 0;   /* Indicate success */
             }
             else
             {

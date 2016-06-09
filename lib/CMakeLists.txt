@@ -26,8 +26,8 @@ link_directories(${SysCallLibs_BINARY_DIR}/src)
 # are used for other targets, to ensure that gtest can be compiled by a user
 # aggressive about warnings.
 add_library(SysCallLibs STATIC
-        src/syscalls.c
-        include/syscalls.h
+        src/library.c
+        include/library.h
         include/iso_font.h
         src/draw.c
         include/draw.h

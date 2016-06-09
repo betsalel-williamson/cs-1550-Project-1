@@ -6,7 +6,7 @@
 #include <signal.h>
 #include <sys/param.h>
 #include <stdlib.h>
-#include "syscalls.h"
+#include "library.h"
 #include "color.h"
 
 void draw_sample();

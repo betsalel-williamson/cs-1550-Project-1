@@ -3,7 +3,7 @@
 //
 
 #include <lib/include/draw.h>
-#include "syscalls.h"
+#include "library.h"
 #include "color.h"
 
 void color_whole_screen(color_t color) {

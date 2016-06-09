@@ -4,7 +4,7 @@
 
 #include "color.h"
 #include "gtest/gtest.h"
-#include "syscalls.h"
+#include "library.h"
 
 TEST(ColorTest, Black_test) {
     ASSERT_EQ(Black, rgb(0, 0, 0));

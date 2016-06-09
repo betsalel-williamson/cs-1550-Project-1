@@ -4,7 +4,7 @@
 
 #include <fcntl.h>
 #include <sys/mman.h>
-#include "syscalls.h"
+#include "library.h"
 #include "gtest/gtest.h"
 #include "mother.h"
 

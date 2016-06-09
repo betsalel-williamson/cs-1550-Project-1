@@ -4,7 +4,7 @@
 
 #include <stddef.h>
 #include "draw.h"
-#include "syscalls.h"
+#include "library.h"
 
 void draw_pixel(int x, int y, color_t color) {
     int horizontal = x, vertical = y;

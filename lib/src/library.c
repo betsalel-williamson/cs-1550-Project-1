@@ -4,15 +4,13 @@
 
 #include <fcntl.h>
 #include <sys/mman.h>
+#include <sys/ioctl.h>
 #include <unistd.h>
-#include <stdint.h>
 #include <time.h>
 #include <errno.h>
-#include <sys/ioctl.h>
-#include "syscalls.h"
+#include "library.h"
 
 #include <linux/fb.h>
-#include <stdio.h>
 
 #define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
 

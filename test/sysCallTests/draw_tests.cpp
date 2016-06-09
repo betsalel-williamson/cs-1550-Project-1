@@ -5,7 +5,7 @@
 #include "gtest/gtest.h"
 #include "draw.h"
 #include "color.h"
-#include "syscalls.h"
+#include "library.h"
 #include "mother.h"
 
 #define BYTES_TO_READ 32

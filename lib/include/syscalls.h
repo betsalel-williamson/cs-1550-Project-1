@@ -36,6 +36,10 @@ char getkey();// select, read
 
 void sleep_ms(long ms);// nanosleep
 
+struct singleton;
+
+struct singleton* get_instance();
+
 #ifdef __cplusplus
 }
 #endif

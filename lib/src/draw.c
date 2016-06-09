@@ -2,16 +2,17 @@
 // Created by School on 6/9/16.
 //
 
+#include <stddef.h>
 #include "draw.h"
 #include "syscalls.h"
 
-static unsigned char *_fb = (unsigned char *) -1;
+static unsigned char *_fb = NULL;
 
 void draw_pixel(int x, int y, color_t color) {
     int horizontal = x, vertical = y;
     unsigned char *fb;
 
-    if (_fb == (unsigned char *) -1) {
+    if (_fb == NULL) {
         fb = get_frame_buffer();
     } else {
         fb = _fb;
@@ -21,6 +22,8 @@ void draw_pixel(int x, int y, color_t color) {
 
     fb[address] = (unsigned char) color;
     fb[address + 1] = (unsigned char) color >> 8;
+
+
 }
 
 

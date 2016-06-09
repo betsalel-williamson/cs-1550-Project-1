@@ -16,6 +16,34 @@
 
 #define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
 
+struct singleton {
+    char sharedData[256];
+    unsigned char *frame_buffer;
+    void *addr;
+    size_t len;
+    int prot;
+    int flags;
+    int fildes;
+    off_t off;
+};
+
+struct singleton *get_instance() {
+    static struct singleton *instance = NULL;
+
+    if (instance == NULL) {
+        int fd = open_frame_buffer(O_RDWR);
+        instance->prot = PROT_READ | PROT_WRITE;
+        instance->flags = MAP_SHARED;
+        instance->len = get_screen_size();
+        instance->frame_buffer = mmap(NULL, instance->len,
+                                      instance->prot,
+                                      instance->flags, fd, 0);
+        close(fd);
+    }
+
+    return instance;
+}
+
 void init_graphics() {
     clear_screen();
 }
@@ -45,8 +73,11 @@ size_t get_horizontal_screen_size() {
                 perror("open");
             }
 
-            if (fd >= 0)
-                close(fd);
+            if (fd >= 0) {
+                if (close(fd) != 0) {
+                    buflen = (size_t) -1;
+                }
+            }
 
         }
     } else {
@@ -77,9 +108,11 @@ size_t get_vertical_screen_size() {
                 perror("open");
             }
 
-            if (fd >= 0)
-                close(fd);
-
+            if (fd >= 0) {
+                if (close(fd) != 0) {
+                    buflen = (size_t) -1;
+                }
+            }
         }
     } else {
         buflen = _v;
@@ -115,16 +148,21 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
 
     sleep_ms(MS_TO_SLEEP);
 
-    close(filedesc);
+    if (close(filedesc) != 0) {
+        output = -1;
+    }
 
     return output;
 }
 
 unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
-    int fd = open_frame_buffer(O_RDONLY);
-
-    return mmap(NULL, buffer_size + offset - pa_offset, PROT_READ,
-                MAP_SHARED, fd, pa_offset);
+    struct singleton *instance = get_instance();
+    return instance->frame_buffer;
+//
+//    int fd = open_frame_buffer(O_RDONLY);
+//
+//    return mmap(NULL, buffer_size + offset - pa_offset, PROT_READ,
+//                MAP_SHARED, fd, pa_offset);
 }
 
 unsigned char *read_frame_buffer(size_t buffer_size) {
@@ -134,10 +172,8 @@ unsigned char *read_frame_buffer(size_t buffer_size) {
 
 
 unsigned char *get_frame_buffer() {
-    int fd = open_frame_buffer(O_RDWR);
-    size_t screen_size = get_screen_size();
-    return mmap(NULL, screen_size, PROT_READ | PROT_WRITE,
-                MAP_SHARED, fd, 0);
+    struct singleton *instance = get_instance();
+    return instance->frame_buffer;
 }
 
 // implementation from http://cc.byexamples.com/2007/05/25/nanosleep-is-better-than-sleep-and-usleep/
@@ -160,7 +196,7 @@ void clear_screen() {
 }
 
 
-char getkey(){
+char getkey() {
     return 'a';
 };
 

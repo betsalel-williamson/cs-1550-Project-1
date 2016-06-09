@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <signal.h>
 #include <sys/param.h>
 #include <stdlib.h>
 #include "syscalls.h"

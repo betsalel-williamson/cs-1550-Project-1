@@ -12,8 +12,11 @@ project(Main)
 include_directories(${SysCallLibs_SOURCE_DIR}/include
         ${SysCallLibs_SOURCE_DIR})
 
-add_executable(${PROJECT_NAME} main.c)
+add_executable(Project1_${PROJECT_NAME} main.c)
+target_link_libraries(Project1_${PROJECT_NAME} SysCallLibs)
 
-target_link_libraries(${PROJECT_NAME} SysCallLibs)
+add_executable(Sample_${PROJECT_NAME} square.c)
+target_link_libraries(Sample_${PROJECT_NAME} SysCallLibs)
+
 
 

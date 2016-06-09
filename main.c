@@ -7,6 +7,7 @@
 #include <sys/param.h>
 #include <stdlib.h>
 #include "syscalls.h"
+#include "color.h"
 
 void draw_sample();
 void draw_sample_colors();

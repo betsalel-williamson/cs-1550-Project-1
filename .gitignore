@@ -8,6 +8,7 @@ build/
 _build/
 *.o
 *.a
+*.log
 
 # os X files
 .DS_Store

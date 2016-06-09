@@ -12,8 +12,15 @@ if {[file isdirectory $BUILD_DIR]} {
 cd $BUILD_DIR
 
 set result [exec cmake ..]
-puts "$result"
+
+set chan [open build.log a]
+set timestamp [clock format [clock seconds]]
+puts $chan "$timestamp\n"
+
+puts $chan "$result"
 
 set result [exec cmake --build .]
-puts "$result"
+puts $chan "$result"
+
+close $chan
 

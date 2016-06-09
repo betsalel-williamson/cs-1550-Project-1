@@ -39,6 +39,7 @@ void init_graphics() {
                           0);
             if (buffer != MAP_FAILED)
             {
+                puts((const char *) buflen);
                 /*
                  * TODO: something interesting here.
                  * "buffer" now points to screen pixels.

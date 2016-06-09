@@ -7,12 +7,9 @@
 #include "library.h"
 
 void draw_pixel(int x, int y, color_t color) {
-    int horizontal = x, vertical = y;
-    unsigned char *fb;
+    unsigned char *fb = get_frame_buffer();
 
-    fb = get_frame_buffer();
-
-    int address = get_address_from_x_y(horizontal, vertical);
+    int address = get_address_from_x_y(x, y);
 
     fb[address] = (unsigned char) color;
     fb[address + 1] = (unsigned char) color >> 8;
@@ -37,7 +34,7 @@ int get_address_from_x_y(int horizontal, int vertical) {
 
     address += horizontal;
 
-    address += (vertical-1) * get_horizontal_screen_size();
+    address += (vertical - 1) * get_horizontal_screen_size();
 
     // revert to index logic
     address -= 1;

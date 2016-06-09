@@ -34,7 +34,7 @@ struct singleton *get_instance() {
 
         // get map for struct
         instance = mmap(NULL, sizeof(struct singleton), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
-        int fd = open_frame_buffer(O_RDWR);
+        instance->fildes = open_frame_buffer(O_RDWR);
         instance->prot = PROT_READ | PROT_WRITE;
         instance->flags = MAP_SHARED;
 
@@ -42,29 +42,20 @@ struct singleton *get_instance() {
         struct fb_fix_screeninfo fixed_info;
         struct fb_var_screeninfo screen_info;
 
-        if (!ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
+        if (!ioctl(instance->fildes, FBIOGET_FSCREENINFO, &fixed_info)) {
             instance->horizontal = fixed_info.line_length;
         }
-        else {
-            perror("open");
-        }
 
-        if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info)) {
+        if (!ioctl(instance->fildes, FBIOGET_VSCREENINFO, &screen_info)) {
             instance->vertical = screen_info.yres_virtual;
-        }
-        else {
-            perror("open");
         }
 
         instance->len = instance->horizontal * instance->vertical;
 
         instance->frame_buffer = mmap(NULL, instance->len,
                                       instance->prot,
-                                      instance->flags, fd, 0);
+                                      instance->flags, instance->fildes, 0);
 
-        if (close(fd) != 0) {
-            // swallow error
-        }
     }
 
     return instance;
@@ -95,20 +86,25 @@ void exit_graphics() {
 }
 
 void destruct_instance(struct singleton *pSingleton) {
+
+    if (close(pSingleton->fildes) != 0) {
+        // error
+    }
     // unmap memory
 }
 
 int open_frame_buffer(int options) {
-    return open(FRAME_BUFFER_FILE_DESCRIPTOR, options);
+    return get_instance()->fildes;
 }
 
 #define MS_TO_SLEEP 500
 
 int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
 
+    int output = -1;
     int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
 
-    int output = filedesc;
+    output = filedesc;
 
     if (filedesc >= 0) {
 
@@ -120,10 +116,6 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
     }
 
     sleep_ms(MS_TO_SLEEP);
-
-    if (close(filedesc) != 0) {
-        output = -1;
-    }
 
     return output;
 }

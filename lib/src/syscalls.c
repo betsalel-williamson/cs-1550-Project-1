@@ -126,7 +126,7 @@ unsigned char *read_frame_buffer(size_t buffer_size) {
 unsigned char *get_frame_buffer() {
     int fd = open_frame_buffer(O_RDWR);
     size_t screen_size = get_screen_size();
-    return mmap(NULL, screen_size, PROT_READ,
+    return mmap(NULL, screen_size, PROT_READ | PROT_WRITE,
                 MAP_SHARED, fd, 0);
 }
 

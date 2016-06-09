@@ -11,7 +11,11 @@
 #include "syscalls.h"
 
 void init_graphics() {
-    //
+    clear_screen();
+}
+
+void exit_graphics(){
+    clear_screen();
 }
 
 int open_frame_buffer(int options) {

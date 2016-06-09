@@ -3,16 +3,33 @@
 //
 
 #include <stdio.h>
+#include <sys/param.h>
+#include <stdlib.h>
 #include "syscalls.h"
 
 void draw_sample();
 void draw_sample_colors();
 
+/**
+ * Handle CTR-C for quit to correctly close down the server's socket.
+ */
+void sig_handler(int signo) {
+    printf("\n\nProcessing received signal: %d\n", signo);
+
+    if (signo == SIGINT)
+    {
+        exit_graphics();
+        exit(EXIT_SUCCESS);
+    }
+}
+
 int main(int argc, char **argv) {
+    signal(SIGINT, sig_handler);
+
+    init_graphics();
 
     draw_sample_colors();
 
-    clear_screen();
     return 0;
 }
 

@@ -62,7 +62,7 @@ TEST(BasicTest, Get_screen_size) {
 //                          0);
 //            if (buffer != MAP_FAILED)
 //            {
-            printf("%d", (int) buflen);
+            printf("%dx%d or %d\n", screen_info.yres_virtual, fixed_info.line_length, (int) buflen);
 //                /*
 //                 * TODO: something interesting here.
 //                 * "buffer" now points to screen pixels.

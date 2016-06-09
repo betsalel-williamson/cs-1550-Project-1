@@ -3,9 +3,13 @@
 //
 
 #include <fcntl.h>
+#include <sys/ioctl.h>
 #include "syscalls.h"
 #include "gtest/gtest.h"
 #include "mother.h"
+
+#include <linux/fb.h>
+
 
 TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work
@@ -34,3 +38,73 @@ TEST(BasicTest, Write_to_zeroth_framebuffer) {
     mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
     ASSERT_EQ(bytesWritten, 10);
 }
+
+TEST(BasicTest, Get_screen_size) {
+
+    struct fb_var_screeninfo screen_info;
+    struct fb_fix_screeninfo fixed_info;
+    char *buffer = NULL;
+    size_t buflen;
+    int fd = -1;
+    int r = 1;
+
+    fd = open("/dev/fb0", O_RDWR);
+    if (fd >= 0) {
+        if (!ioctl(fd, FBIOGET_VSCREENINFO, &screen_info) &&
+            !ioctl(fd, FBIOGET_FSCREENINFO, &fixed_info)) {
+            buflen = screen_info.yres_virtual * fixed_info.line_length;
+//            buffer = mmap(NULL,
+//                          buflen,
+//                          PROT_READ|PROT_WRITE,
+//                          MAP_SHARED,
+//                          fd,
+//                          0);
+//            if (buffer != MAP_FAILED)
+//            {
+            puts((const char *) buflen);
+//                /*
+//                 * TODO: something interesting here.
+//                 * "buffer" now points to screen pixels.
+//                 * Each individual pixel might be at:
+//                 *    buffer + x * screen_info.bits_per_pixel/8
+//                 *           + y * fixed_info.line_length
+//                 * Then you can write pixels at locations such as that.
+//                 */
+//
+//                r = 0;   /* Indicate success */
+//            }
+//            else
+//            {
+//                perror("mmap");
+//            }
+//        }
+//        else
+//        {
+//            perror("ioctl");
+//        }
+        }
+        else {
+            perror("open");
+        }
+
+//    /*
+//     * Clean up
+//     */
+//    if (buffer && buffer != MAP_FAILED)
+//        munmap(buffer, buflen);
+        if (fd >= 0)
+            close(fd);
+
+//    return r;
+
+//    struct fb_var_screeninfo screen_info;
+//    struct fb_fix_screeninfo fixed_info;
+//
+//    if (ioctl(FRAME_BUFFER_FILE_DESCRIPTOR, FBIOGET_VSCREENINFO, &varInfo) == -1) {
+////        ERR("Failed FBIOGET_VSCREENINFO on %s (%s)\n", FBVID_DEVICE,
+////            strerror(errno));
+////        return FAILURE;
+//    }
+
+//    ioctl(FBIOGET_VSCREENINFO);
+    }

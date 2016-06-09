@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 
     init_graphics();
 
-    draw_sample_colors();
+//    draw_sample_colors();
 
     exit_graphics();
 

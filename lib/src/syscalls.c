@@ -17,7 +17,7 @@ int open_frame_buffer(int options) {
     return open("/dev/fb0", options);
 }
 
-#define MS_TO_SLEEP 15000
+#define MS_TO_SLEEP 1500
 int write_to_frame_buffer(unsigned short *write_buffer, size_t num_bytes) {
 
     int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
@@ -54,5 +54,11 @@ unsigned char *read_frame_buffer(size_t buffer_size) {
 }
 
 void sleep_ms(long ms){
-    nanosleep((const struct timespec *) (ms * 1000000), NULL);
+    struct timespec req={0};
+    time_t sec=(int)(ms/1000);
+    ms=ms-(sec*1000);
+    req.tv_sec=sec;
+    req.tv_nsec=ms*1000000L;
+    while(nanosleep(&req,&req)==-1)
+        continue;
 }

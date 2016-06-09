@@ -31,7 +31,9 @@ int main(int argc, char **argv) {
 
     draw_sample_colors();
 
-    return 0;
+    exit_graphics();
+
+    exit(EXIT_SUCCESS);
 }
 
 # define SAMPLE_BUFFER_SIZE 2000

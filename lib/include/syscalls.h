@@ -13,9 +13,9 @@ void init_graphics();// open, ioctl, mmap
 
 int open_frame_buffer(int);
 
-unsigned char * read_frame_buffer(size_t buffer_size);
+unsigned char *read_frame_buffer(size_t buffer_size);
 
-unsigned char * read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset);
+unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset);
 
 int write_to_frame_buffer(unsigned short *write_buffer, size_t num_bytes);
 
@@ -27,7 +27,7 @@ char getkey();// select, read
 
 void sleep_ms(long ms);// nanosleep
 
-#define rgb(r,g,b) ((((31*(r+4))/255)<<11) | (((63*(g+2))/255)<<5) | ((31*(b+4))/255))
+#define rgb(r, g, b) (((r >>= 3)<<11) | ((g >>= 2)<<5) | (b >>= 3))
 
 /* some RGB color definitions                                                 */
 #define Black           0x0000      /*   0,   0,   0 */

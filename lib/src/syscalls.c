@@ -34,7 +34,7 @@ int open_frame_buffer(int options) {
 
 #define MS_TO_SLEEP 500
 
-int write_to_frame_buffer(unsigned short *write_buffer, size_t num_bytes) {
+int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
 
     int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
 

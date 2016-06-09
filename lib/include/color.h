@@ -34,6 +34,8 @@ typedef unsigned short color_t;
 #define Orange          rgb( 255, 165,   0) /*0xFD20*/
 #define GreenYellow     rgb( 173, 255,  47) /*0xAFE5*/
 
+void draw_sample_colors();
+
 #ifdef __cplusplus
 }
 #endif

@@ -93,6 +93,16 @@ void increment_x_y(int *x, int *y) {
 void draw_text(int x, int y, const char *text, color_t c) {
     unsigned short *fb = get_frame_buffer();
 
+    if (x+8 > get_horizontal_screen_size()) {
+//        return -1;
+        x = 0;
+    }
+
+    if (y+16 > get_vertical_screen_size()) {
+//        return -1;
+        y =  0;
+    }
+
     int width = 8;
     int height = 16;
     int address = get_address_from_x_y(x, y);

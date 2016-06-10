@@ -46,7 +46,7 @@ TEST(DrawTests, Get_address_from_x_y_max_x) {
 }
 
 TEST(DrawTests, Get_address_from_x_y_max_x_plus_one) {
-    ASSERT_EQ(-1, get_address_from_x_y(get_horizontal_screen_size(),0));
+    ASSERT_EQ(0, get_address_from_x_y(get_horizontal_screen_size(),0));
 }
 
 TEST(DrawTests, Get_address_from_x_y_min_y_plus_one) {
@@ -54,11 +54,15 @@ TEST(DrawTests, Get_address_from_x_y_min_y_plus_one) {
 }
 
 TEST(DrawTests, Get_address_from_x_y_max_y) {
-    ASSERT_EQ(480*640, get_address_from_x_y(0,479));
+    ASSERT_EQ(479*640, get_address_from_x_y(0,479));
+}
+
+TEST(DrawTests, Get_address_from_x_y_max_x_and_y) {
+    ASSERT_EQ((480*640)-1, get_address_from_x_y(639,479));
 }
 
 TEST(DrawTests, Get_address_from_x_y_max_y_plus_one) {
-    ASSERT_EQ(-1, get_address_from_x_y(0,get_vertical_screen_size()));
+    ASSERT_EQ(0, get_address_from_x_y(0,get_vertical_screen_size()));
 }
 
 TEST(DrawTests, Access_address_from_x_y_min_x_y) {

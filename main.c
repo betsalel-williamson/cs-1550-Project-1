@@ -18,8 +18,7 @@ void sig_handler(int signo) {
 
     exit_graphics();
 
-    if (signo == SIGINT)
-    {
+    if (signo == SIGINT) {
         exit(EXIT_SUCCESS);
     }
     // else
@@ -33,9 +32,13 @@ int main(int argc, char **argv) {
 
     draw_sample_colors();
 
-    draw_rect(20, 20, 40, 100, Orange);
+    draw_rect(20, 20, 100, 40, Orange);
 
-    sleep_ms(500);
+    sleep_ms(1000);
+
+    draw_text(40, 40, "abc", Red);
+
+    sleep_ms(1000);
 
     exit_graphics();
 

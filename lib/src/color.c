@@ -21,7 +21,7 @@ void color_whole_screen(color_t color) {
     sleep_ms(1500);
 }
 
-#define SAMPLE_COLOR_BUFFER_SIZE (int) 1280*480
+#define SAMPLE_COLOR_BUFFER_SIZE (int) 640*480
 
 void draw_sample_colors() {
 

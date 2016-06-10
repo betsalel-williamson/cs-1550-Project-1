@@ -38,45 +38,45 @@ typedef unsigned short color_t;
 #define Orange          rgb( 255, 165,   0) /*0xFD20*/
 #define GreenYellow     rgb( 173, 255,  47) /*0xAFE5*/
 
-//void draw_sample_colors();
-//
-//void color_whole_screen(color_t color);
-//
-//void draw_pixel(int x, int y, color_t color);
-//
-//int get_address_from_x_y(int horizontal, int vertical);
-//
-//void draw_rect(int x1, int y1, int width, int height, color_t c);
-//
-//void draw_text(int x, int y, const char *text, color_t c);
-//
-//void init_graphics();// open, ioctl, mmap
-//
-//size_t get_frame_buffer_len();
-//
-//size_t get_horizontal_screen_size();
-//
-//size_t get_vertical_screen_size();
-//
-//int open_file_descriptor();
-//
-//unsigned short *get_frame_buffer();
-//
-//int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes);
-//
-//void exit_graphics();// ioctl
-//
-//void clear_screen();// write
-//
-//char getkey();// select, read
-//
-//void sleep_ms(long ms);// nanosleep
-//
-//struct singleton;
-//
-//struct singleton *get_instance();
-//
-//void destruct_instance(struct singleton *pSingleton);
+void draw_sample_colors();
+
+void color_whole_screen(color_t color);
+
+void draw_pixel(int x, int y, color_t color);
+
+int get_address_from_x_y(int horizontal, int vertical);
+
+void draw_rect(int x1, int y1, int width, int height, color_t c);
+
+void draw_text(int x, int y, const char *text, color_t c);
+
+void init_graphics();// open, ioctl, mmap
+
+size_t get_frame_buffer_len();
+
+size_t get_horizontal_screen_size();
+
+size_t get_vertical_screen_size();
+
+int open_file_descriptor();
+
+unsigned short *get_frame_buffer();
+
+int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes);
+
+void exit_graphics();// ioctl
+
+void clear_screen();// write
+
+char getkey();// select, read
+
+void sleep_ms(long ms);// nanosleep
+
+struct singleton;
+
+struct singleton *get_instance();
+
+void destruct_instance(struct singleton *pSingleton);
 
 
 /*

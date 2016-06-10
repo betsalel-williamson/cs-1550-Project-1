@@ -1,4 +1,5 @@
 #include <sys/param.h>
+#include <signal.h>
 #include "library.h"
 
 /**

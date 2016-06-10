@@ -34,7 +34,7 @@ struct singleton *get_instance() {
 
         // get map for struct
         instance = mmap(NULL, sizeof(struct singleton), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
-        instance->fildes = open(FRAME_BUFFER_FILE_DESCRIPTOR, O_RDWR | O_APPEND);//| O_WRONLY | O_APPEND
+        instance->fildes = open(FRAME_BUFFER_FILE_DESCRIPTOR, O_RDWR);//| O_WRONLY | O_APPEND
         instance->prot = PROT_READ | PROT_WRITE;
         instance->flags = MAP_SHARED;
 
@@ -100,24 +100,29 @@ int open_frame_buffer(int options) {
 #define MS_TO_SLEEP 500
 
 int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
-
-    int output = -1;
-    int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
-
-    output = filedesc;
-
-    if (filedesc >= 0) {
-
-        if ((write(filedesc, (void *) write_buffer, (size_t) num_bytes)) != num_bytes) {
-            output = -1;
-        } else {
-            output = (int) num_bytes;
-        }
+    int i;
+    for (i = 0; i < num_bytes; ++i) {
+        get_instance()->frame_buffer[i] = (unsigned char) write_buffer[i];
     }
+//    fb[address] = (unsigned char) color;
+//
+//    int output = -1;
+//    int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
+//
+//    output = filedesc;
+//
+//    if (filedesc >= 0) {
+//
+//        if ((write(filedesc, (void *) write_buffer, (size_t) num_bytes)) != num_bytes) {
+//            output = -1;
+//        } else {
+//            output = (int) num_bytes;
+//        }
+//    }
 
     sleep_ms(MS_TO_SLEEP);
 
-    return output;
+    return i;
 }
 
 unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {

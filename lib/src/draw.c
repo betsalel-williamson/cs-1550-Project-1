@@ -82,10 +82,10 @@ void draw_text(int x, int y, const char *text, color_t c) {
             char byte = iso_font[letter * 16 + j];
 
             int k;
-            for (k = 0; k < width; ++k) {
+            for (k = 0; k < width; ++k, ++temp_address) {
 
-                if (byte & (0b01 << (width-k))) {
-                    fb[temp_address++] = c;
+                if (byte & (0b01 << (width-k)) == 1) {
+                    fb[temp_address] = c;
                 }
             }
 

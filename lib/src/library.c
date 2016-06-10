@@ -43,14 +43,14 @@ struct singleton *get_instance() {
         struct fb_var_screeninfo screen_info;
 
         if (!ioctl(instance->fildes, FBIOGET_FSCREENINFO, &fixed_info)) {
-            instance->horizontal = (fixed_info.line_length / 2);
+            instance->horizontal = (fixed_info.line_length/2);
         }
 
         if (!ioctl(instance->fildes, FBIOGET_VSCREENINFO, &screen_info)) {
             instance->vertical = screen_info.yres_virtual;
         }
 
-        instance->len = instance->horizontal * instance->vertical;
+        instance->len = instance->horizontal * instance->vertical * 2;
 
         instance->frame_buffer = (unsigned short *) mmap(NULL, instance->len,
                                                          instance->prot,

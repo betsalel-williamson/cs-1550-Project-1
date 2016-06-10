@@ -99,10 +99,10 @@ int open_frame_buffer() {
 
 #define MS_TO_SLEEP 500
 
-int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
+int write_to_frame_buffer(unsigned short * write_buffer, int num_bytes) {
     int i;
     for (i = 0; i < num_bytes; ++i) {
-        get_instance()->frame_buffer[i] = (unsigned char) write_buffer[i];
+        get_instance()->frame_buffer[i] = write_buffer[i];
     }
 //    fb[address] = (unsigned char) color;
 //

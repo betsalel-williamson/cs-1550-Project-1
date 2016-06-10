@@ -34,7 +34,7 @@ struct singleton *get_instance() {
 
         // get map for struct
         instance = mmap(NULL, sizeof(struct singleton), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
-        instance->fildes = open(FRAME_BUFFER_FILE_DESCRIPTOR, O_RDWR);//| O_WRONLY | O_APPEND
+        instance->fildes = open(FRAME_BUFFER_FILE_DESCRIPTOR, O_RDWR | O_APPEND);//| O_WRONLY | O_APPEND
         instance->prot = PROT_READ | PROT_WRITE;
         instance->flags = MAP_SHARED;
 

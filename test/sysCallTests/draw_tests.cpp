@@ -61,7 +61,47 @@ TEST(DrawTests, Get_address_from_x_y_max_y_plus_one) {
     ASSERT_EQ(-1, get_address_from_x_y(0,get_vertical_screen_size()));
 }
 
+TEST(DrawTests, Access_address_from_x_y_min_x_y) {
+    int x = 0, y = 0;
+    color_t color = Blue;
 
+    draw_pixel(x, y, color);
+}
+
+TEST(DrawTests, Access_address_from_x_y_max_x) {
+    int x = 639, y = 0;
+    color_t color = Blue;
+
+    draw_pixel(x, y, color);
+}
+
+TEST(DrawTests, Access_address_from_x_y_max_x_plus_one) {
+    int x = (int) get_horizontal_screen_size() - 1, y = 0;
+    color_t color = Blue;
+
+    draw_pixel(x, y, color);
+}
+
+TEST(DrawTests, Access_address_from_x_y_min_y_plus_one) {
+    int x = 0, y = 1;
+    color_t color = Blue;
+
+    draw_pixel(x, y, color);
+}
+
+TEST(DrawTests, Access_address_from_x_y_max_y) {
+    int x = 0, y = 479;
+    color_t color = Blue;
+
+    draw_pixel(x, y, color);
+}
+
+TEST(DrawTests, Access_address_from_x_y_max_y_plus_one) {
+    int x = 0, y = (int) (get_vertical_screen_size() - 1);
+    color_t color = Blue;
+
+    draw_pixel(x, y, color);
+}
 
 TEST(DrawTests, Color_whole_screen_test) {
 

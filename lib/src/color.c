@@ -7,12 +7,13 @@
 #include "color.h"
 
 void color_whole_screen(color_t color) {
+
     int h = (int) get_horizontal_screen_size(), v = (int) get_vertical_screen_size();
 
     int y;
     for (y = 0; y < v; ++y) {
         int x;
-        for (x = 0; x < h; ++x) {
+        for (x = 0; x < h/2; ++x) {
             draw_pixel(x, y, color);
         }
     }

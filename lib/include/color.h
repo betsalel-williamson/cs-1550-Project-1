@@ -36,6 +36,8 @@ typedef unsigned short color_t;
 
 void draw_sample_colors();
 
+void color_whole_screen(color_t color);
+
 #ifdef __cplusplus
 }
 #endif

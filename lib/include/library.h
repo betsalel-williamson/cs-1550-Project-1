@@ -13,13 +13,13 @@ extern "C" {
 
 void init_graphics();// open, ioctl, mmap
 
-int get_screen_size();
+size_t get_frame_buffer_len();
+size_t get_horizontal_screen_size();
+size_t get_vertical_screen_size();
 
-int open_frame_buffer(int);
+int open_file_descriptor();
 
-unsigned char *read_frame_buffer(size_t buffer_size);
-
-unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset);
+unsigned short * get_frame_buffer();
 
 int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes);
 
@@ -30,6 +30,12 @@ void clear_screen();// write
 char getkey();// select, read
 
 void sleep_ms(long ms);// nanosleep
+
+struct singleton;
+
+struct singleton* get_instance();
+
+void destruct_instance(struct singleton *pSingleton);
 
 #ifdef __cplusplus
 }

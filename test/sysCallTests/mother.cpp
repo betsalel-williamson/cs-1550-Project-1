@@ -5,7 +5,7 @@
 #include <cstdio>
 #include "mother.h"
 
-void mother::print_buffer(unsigned char *buffer, int buffer_size) {
+void mother::print_buffer(unsigned short * buffer, int buffer_size) {
     int i;
 
     // printf("0x"); -- uncomment if you want to start with "0x"

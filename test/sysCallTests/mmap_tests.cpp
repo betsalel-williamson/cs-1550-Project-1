@@ -4,22 +4,24 @@
 
 #include <fcntl.h>
 #include <sys/mman.h>
-#include "syscalls.h"
+#include "library.h"
 #include "gtest/gtest.h"
 #include "mother.h"
 
 #define BYTES_TO_READ 32
 
-TEST(BasicTest, Mmap_read) {
+TEST(Mmap_tests, Mmap_read) {
 
-    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
+    unsigned short *fb = get_frame_buffer();
+    mother::print_buffer(fb, BYTES_TO_READ);
+
 }
 
-//TEST(BasicTest, Mmap_write) {
+//TEST(Mmap_tests, Mmap_write) {
 //    EXPECT_EQ(true, true);
 //}
 //
-//TEST(BasicTest, Mmap_read_and_write) {
+//TEST(Mmap_tests, Mmap_read_and_write) {
 //    EXPECT_EQ(true, true);
 //}
 

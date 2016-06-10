@@ -82,7 +82,8 @@ size_t get_vertical_screen_size() {
 
 void exit_graphics() {
     clear_screen();
-    destruct_instance(get_instance());
+    struct singleton *instance = get_instance();
+    destruct_instance(instance);
 }
 
 void destruct_instance(struct singleton *pSingleton) {
@@ -100,9 +101,12 @@ int open_frame_buffer() {
 #define MS_TO_SLEEP 500
 
 int write_to_frame_buffer(unsigned short * write_buffer, int num_bytes) {
+
+    struct singleton *instance = get_instance();
+
     int i;
     for (i = 0; i < num_bytes; ++i) {
-        get_instance()->frame_buffer[i] = write_buffer[i];
+        instance->frame_buffer[i] = write_buffer[i];
     }
 //    fb[address] = (unsigned char) color;
 //

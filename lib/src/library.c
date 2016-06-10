@@ -11,8 +11,7 @@
 #include "library.h"
 
 #include <linux/fb.h>
-
-#define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
+#include <lib/include/color.h>
 
 struct singleton {
     char sharedData[256];
@@ -27,6 +26,8 @@ struct singleton {
     size_t vertical;
 };
 
+#define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
+
 struct singleton *get_instance() {
     static struct singleton *instance = NULL;
 
@@ -34,6 +35,7 @@ struct singleton *get_instance() {
 
         // get map for struct
         instance = mmap(NULL, sizeof(struct singleton), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
+
         instance->fildes = open(FRAME_BUFFER_FILE_DESCRIPTOR, O_RDWR);//| O_WRONLY | O_APPEND
         instance->prot = PROT_READ | PROT_WRITE;
         instance->flags = MAP_SHARED;
@@ -71,8 +73,9 @@ void destruct_instance(struct singleton *pSingleton) {
 }
 
 void init_graphics() {
-    clear_screen();
-    get_instance();
+//    clear_screen();
+    color_whole_screen(White);
+
 }
 
 size_t get_frame_buffer_len() {

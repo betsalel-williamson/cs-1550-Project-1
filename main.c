@@ -39,7 +39,8 @@ int main(int argc, char **argv) {
     exit(EXIT_SUCCESS);
 }
 
-# define SAMPLE_BUFFER_SIZE 1280*240
+# define SAMPLE_BUFFER_SIZE 640*480
+
 void draw_sample() {
     unsigned short buffer[SAMPLE_BUFFER_SIZE] = {};
     int i;

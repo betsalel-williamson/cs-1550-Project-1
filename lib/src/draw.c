@@ -22,11 +22,13 @@ int get_address_from_x_y(int horizontal, int vertical) {
     vertical += 1;
 
     if (horizontal > get_horizontal_screen_size()) {
-        return -1;
+//        return -1;
+        return 0;
     }
 
     if (vertical > get_vertical_screen_size()) {
-        return -1;
+//        return -1;
+        return 0;
     }
 
     int address = 0;
@@ -42,7 +44,24 @@ int get_address_from_x_y(int horizontal, int vertical) {
 }
 
 void draw_rect(int x1, int y1, int width, int height, color_t c) {
+    unsigned short *fb = get_frame_buffer();
 
+    int address = get_address_from_x_y(x1, y1);
+    int temp_address = address;
+
+    int i;
+    for (i = 0; i < height; ++i) {
+
+        int j;
+
+        for (j = 0; j < width; ++j) {
+
+            fb[temp_address++] = c;
+
+        }
+
+        temp_address = (int) (address + (i * get_horizontal_screen_size()));
+    }
 }
 
 void draw_text(int x, int y, const char *text, color_t c) {

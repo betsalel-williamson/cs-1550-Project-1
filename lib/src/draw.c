@@ -73,14 +73,15 @@ void draw_text(int x, int y, const char *text, color_t c) {
     int address = get_address_from_x_y(x, y);
     int temp_address = address;
 
-    for (int i = 0; text[i] != '\0'; ++i) {
+    int i;
+    for (i = 0; text[i] != '\0'; ++i) {
         int letter = text[i];
         char byte = iso_font[letter * 16 + i];
+
         int j;
         for (j = 0; j < height; ++j) {
 
             int k;
-
             for (k = 0; k < width; ++k) {
 
                 if (byte & (1 << k)) {

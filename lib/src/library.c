@@ -93,7 +93,7 @@ void destruct_instance(struct singleton *pSingleton) {
     // unmap memory
 }
 
-int open_frame_buffer(int options) {
+int open_frame_buffer() {
     return get_instance()->fildes;
 }
 
@@ -124,22 +124,6 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
 
     return i;
 }
-
-unsigned short * read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
-    struct singleton *instance = get_instance();
-    return instance->frame_buffer;
-//
-//    int fd = open_frame_buffer(O_RDONLY);
-//
-//    return mmap(NULL, buffer_size + offset - pa_offset, PROT_READ,
-//                MAP_SHARED, fd, pa_offset);
-}
-
-unsigned short * read_frame_buffer(size_t buffer_size) {
-
-    return read_frame_buffer_with_offset(buffer_size, 0, 0);
-}
-
 
 unsigned short * get_frame_buffer() {
     struct singleton *instance = get_instance();

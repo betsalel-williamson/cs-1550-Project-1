@@ -14,12 +14,13 @@ TEST(DrawTests, Draw_white_pixel) {
     // when called to draw pixel at 0,0
     draw_pixel(0, 0, White);
 
-    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
+    unsigned short * fb = get_frame_buffer();
+    mother::print_buffer(fb, BYTES_TO_READ);
 
     // then pixel is drawn, reading framebuffer will show that something was drawn
-    unsigned short * buffer = read_frame_buffer(2);
+//    unsigned short * buffer = read_frame_buffer(2);
 
-    ASSERT_EQ(0xffff, buffer[0]);
+    ASSERT_EQ(0xffff, fb[0]);
 //    ASSERT_EQ(0xff, buffer[1]);
 }
 
@@ -27,12 +28,12 @@ TEST(DrawTests, Draw_blue_pixel) {
     // when called to draw pixel at 0,0
     draw_pixel(0, 0, Blue);
 
-    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
-
+    unsigned short * fb = get_frame_buffer();
+    mother::print_buffer(fb, BYTES_TO_READ);
     // then pixel is drawn, reading framebuffer will show that something was drawn
-    unsigned short * buffer = read_frame_buffer(2);
+//    unsigned short * buffer = read_frame_buffer(2);
 
-    ASSERT_EQ(0x001f, buffer[0]);
+    ASSERT_EQ(0x001f, fb[0]);
 }
 
 

@@ -12,7 +12,9 @@
 
 TEST(BasicTest, Mmap_read) {
 
-    mother::print_buffer(read_frame_buffer(BYTES_TO_READ), BYTES_TO_READ);
+    unsigned short *fb = get_frame_buffer();
+    mother::print_buffer(fb, BYTES_TO_READ);
+
 }
 
 //TEST(BasicTest, Mmap_write) {

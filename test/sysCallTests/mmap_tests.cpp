@@ -10,18 +10,18 @@
 
 #define BYTES_TO_READ 32
 
-TEST(BasicTest, Mmap_read) {
+TEST(Mmap_tests, Mmap_read) {
 
     unsigned short *fb = get_frame_buffer();
     mother::print_buffer(fb, BYTES_TO_READ);
 
 }
 
-//TEST(BasicTest, Mmap_write) {
+//TEST(Mmap_tests, Mmap_write) {
 //    EXPECT_EQ(true, true);
 //}
 //
-//TEST(BasicTest, Mmap_read_and_write) {
+//TEST(Mmap_tests, Mmap_read_and_write) {
 //    EXPECT_EQ(true, true);
 //}
 

@@ -152,11 +152,26 @@ void clear_screen() {
 }
 
 
-char getkey() {
+int kbhit()
+{
     struct timeval tv = { 0L, 0L };
     fd_set fds;
     FD_ZERO(&fds);
     FD_SET(0, &fds);
-    return (char) select(1, &fds, NULL, NULL, &tv);
+    return select(1, &fds, NULL, NULL, &tv);
+}
+
+char getkey() {
+    while (!kbhit()) {
+        /* do some work */
+    }
+
+    int r;
+    unsigned char c;
+    if ((r = (int) read(0, &c, sizeof(c))) < 0) {
+        return (char) r;
+    } else {
+        return c;
+    }
 };
 

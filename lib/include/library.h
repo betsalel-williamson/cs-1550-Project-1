@@ -17,7 +17,7 @@ size_t get_screen_size();
 size_t get_horizontal_screen_size();
 size_t get_vertical_screen_size();
 
-int open_frame_buffer();
+int open_file_descriptor();
 
 unsigned short * get_frame_buffer();
 
@@ -34,6 +34,8 @@ void sleep_ms(long ms);// nanosleep
 struct singleton;
 
 struct singleton* get_instance();
+
+void destruct_instance(struct singleton *pSingleton);
 
 #ifdef __cplusplus
 }

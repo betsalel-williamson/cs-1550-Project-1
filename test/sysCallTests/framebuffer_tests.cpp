@@ -14,7 +14,7 @@
 TEST(BasicTest, Open_zeroth_framebuffer) {
     // opening this file will work
 
-    int filedesc = open_frame_buffer();
+    int filedesc = open_file_descriptor();
 
     printf("Opened filedesc: %d\n", filedesc);
 

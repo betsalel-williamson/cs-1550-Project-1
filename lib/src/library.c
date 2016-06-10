@@ -61,7 +61,14 @@ struct singleton *get_instance() {
     return instance;
 }
 
-void destruct_instance(struct singleton *pSingleton);
+
+void destruct_instance(struct singleton *pSingleton) {
+
+    if (close(pSingleton->fildes) != 0) {
+        // error
+    }
+    // unmap memory
+}
 
 void init_graphics() {
     clear_screen();
@@ -86,15 +93,9 @@ void exit_graphics() {
     destruct_instance(instance);
 }
 
-void destruct_instance(struct singleton *pSingleton) {
 
-    if (close(pSingleton->fildes) != 0) {
-        // error
-    }
-    // unmap memory
-}
 
-int open_frame_buffer() {
+int open_file_descriptor() {
     return get_instance()->fildes;
 }
 
@@ -102,27 +103,12 @@ int open_frame_buffer() {
 
 int write_to_frame_buffer(unsigned short * write_buffer, int num_bytes) {
 
-    struct singleton *instance = get_instance();
+    unsigned short * fb = get_frame_buffer();
 
     int i;
     for (i = 0; i < num_bytes; ++i) {
-        instance->frame_buffer[i] = write_buffer[i];
+        fb[i] = write_buffer[i];
     }
-//    fb[address] = (unsigned char) color;
-//
-//    int output = -1;
-//    int filedesc = open_frame_buffer(O_WRONLY | O_APPEND);
-//
-//    output = filedesc;
-//
-//    if (filedesc >= 0) {
-//
-//        if ((write(filedesc, (void *) write_buffer, (size_t) num_bytes)) != num_bytes) {
-//            output = -1;
-//        } else {
-//            output = (int) num_bytes;
-//        }
-//    }
 
     sleep_ms(MS_TO_SLEEP);
 

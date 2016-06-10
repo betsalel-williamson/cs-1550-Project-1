@@ -7,8 +7,6 @@
 #include "draw.h"
 #include "library.h"
 
-const char *append_text(const char *text, char *string);
-
 void draw_pixel(int x, int y, color_t color) {
     unsigned short *fb = get_frame_buffer();
 
@@ -98,14 +96,14 @@ void draw_text(int x, int y, const char *text, color_t c) {
 //        return -1;
         x = 0;
 
-        draw_text(0, (int) (get_vertical_screen_size() - 16), "error; x text out of bounds", Red);
+        draw_text(0, (int) (get_vertical_screen_size() - 32), "error; x text out of bounds", Red);
     }
 
     if (y+16 > get_vertical_screen_size()) {
 //        return -1;
         y =  0;
 
-        draw_text(0, (int) (get_vertical_screen_size() - 32), "error; y text out of bounds", Red);
+        draw_text(0, (int) (get_vertical_screen_size() - 16), "error; y text out of bounds", Red);
     }
 
     int width = 8;
@@ -126,7 +124,7 @@ void draw_text(int x, int y, const char *text, color_t c) {
 
                 if (byte & (1 << k)) {
                     fb[temp_address] = c;
-                } 
+                }
             }
 
             temp_address = (int) (address + (j * get_horizontal_screen_size()));

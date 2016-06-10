@@ -12,6 +12,7 @@
 
 #include <linux/fb.h>
 #include <lib/include/color.h>
+#include <sys/termios.h>
 
 struct singleton {
     char sharedData[256];
@@ -73,6 +74,11 @@ void destruct_instance(struct singleton *pSingleton) {
 }
 
 void init_graphics() {
+    struct termios term;
+    int openLocation;
+    int ioResult;
+    openLocation = open("/dev/tty0",O_RDWR);
+    ioResult = ioctl(openLocation,TCGETS,&term);
 //    clear_screen();
     color_whole_screen(White);
 
@@ -147,6 +153,10 @@ void clear_screen() {
 
 
 char getkey() {
-    return 'q';
+    struct timeval tv = { 0L, 0L };
+    fd_set fds;
+    FD_ZERO(&fds);
+    FD_SET(0, &fds);
+    return (char) select(1, &fds, NULL, NULL, &tv);
 };
 

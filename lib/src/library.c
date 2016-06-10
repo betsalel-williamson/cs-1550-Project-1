@@ -53,8 +53,8 @@ struct singleton *get_instance() {
         instance->len = instance->horizontal * instance->vertical;
 
         instance->frame_buffer = (unsigned short *) mmap(NULL, instance->len,
-                                      instance->prot,
-                                      instance->flags, instance->fildes, 0);
+                                                         instance->prot,
+                                                         instance->flags, instance->fildes, 0);
 
     }
 
@@ -76,15 +76,18 @@ void init_graphics() {
 }
 
 size_t get_screen_size() {
-    return get_instance()->len;
+    struct singleton *instance = get_instance();
+    return instance->len;
 }
 
 size_t get_horizontal_screen_size() {
-    return get_instance()->horizontal;
+    struct singleton *instance = get_instance();
+    return instance->horizontal;
 }
 
 size_t get_vertical_screen_size() {
-    return get_instance()->vertical;
+    struct singleton *instance = get_instance();
+    return instance->vertical;
 }
 
 void exit_graphics() {
@@ -94,16 +97,16 @@ void exit_graphics() {
 }
 
 
-
 int open_file_descriptor() {
-    return get_instance()->fildes;
+    struct singleton *instance = get_instance();
+    return instance->fildes;
 }
 
 #define MS_TO_SLEEP 500
 
-int write_to_frame_buffer(unsigned short * write_buffer, int num_bytes) {
+int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
 
-    unsigned short * fb = get_frame_buffer();
+    unsigned short *fb = get_frame_buffer();
 
     int i;
     for (i = 0; i < num_bytes; ++i) {
@@ -115,7 +118,7 @@ int write_to_frame_buffer(unsigned short * write_buffer, int num_bytes) {
     return i;
 }
 
-unsigned short * get_frame_buffer() {
+unsigned short *get_frame_buffer() {
     struct singleton *instance = get_instance();
     return instance->frame_buffer;
 }
@@ -141,6 +144,6 @@ void clear_screen() {
 
 
 char getkey() {
-    return 'a';
+    return 'q';
 };
 

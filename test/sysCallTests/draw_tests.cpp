@@ -24,19 +24,28 @@ TEST(DrawTests, Draw_white_pixel) {
 }
 
 
-TEST(DrawTests, Get_address_from_x_y) {
+TEST(DrawTests, Get_address_from_x_y_min_x_y) {
     ASSERT_EQ(0, get_address_from_x_y(0,0));
+}
 
+TEST(DrawTests, Get_address_from_x_y_max_x) {
     ASSERT_EQ(639, get_address_from_x_y(639,0));
+}
 
+TEST(DrawTests, Get_address_from_x_y_max_x_plus_one) {
     ASSERT_EQ(-1, get_address_from_x_y(get_horizontal_screen_size(),0));
+}
 
+TEST(DrawTests, Get_address_from_x_y_min_y_plus_one) {
     ASSERT_EQ(640, get_address_from_x_y(0,1));
+}
 
+TEST(DrawTests, Get_address_from_x_y_max_y) {
     ASSERT_EQ(480*640, get_address_from_x_y(0,479));
+}
 
+TEST(DrawTests, Get_address_from_x_y_max_y_plus_one) {
     ASSERT_EQ(-1, get_address_from_x_y(0,get_vertical_screen_size()));
-
 }
 
 TEST(DrawTests, Draw_blue_pixel) {

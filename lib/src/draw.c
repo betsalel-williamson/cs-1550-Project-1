@@ -76,10 +76,10 @@ void draw_text(int x, int y, const char *text, color_t c) {
     int i;
     for (i = 0; text[i] != '\0'; ++i) {
         int letter = text[i];
-        char byte = iso_font[letter * 16 + i];
 
         int j;
         for (j = 0; j < height; ++j) {
+            char byte = iso_font[letter * 16 + j];
 
             int k;
             for (k = 0; k < width; ++k) {
@@ -91,10 +91,7 @@ void draw_text(int x, int y, const char *text, color_t c) {
 
             temp_address = (int) (address + (j * get_horizontal_screen_size()));
         }
-
     }
-
-
 }
 
 int x_y_to_buffer(int x, int y) {

@@ -43,7 +43,7 @@ struct singleton *get_instance() {
         struct fb_var_screeninfo screen_info;
 
         if (!ioctl(instance->fildes, FBIOGET_FSCREENINFO, &fixed_info)) {
-            instance->horizontal = fixed_info.line_length / 2;
+            instance->horizontal = fixed_info.line_length;
         }
 
         if (!ioctl(instance->fildes, FBIOGET_VSCREENINFO, &screen_info)) {

@@ -69,8 +69,8 @@ TEST(BasicTest, Get_screen_size) {
             perror("open");
         }
 
-        if (fd >= 0)
-            close(fd);
+//        if (fd >= 0)
+//            close(fd);
 
     }
 

@@ -35,6 +35,8 @@ int main(int argc, char **argv) {
 
     draw_rect(20, 20, 40, 100, Orange);
 
+    sleep_ms(500);
+
     exit_graphics();
 
     exit(EXIT_SUCCESS);

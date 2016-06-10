@@ -11,6 +11,7 @@
 #include <linux/fb.h>
 #include <sys/termios.h>
 #include <sys/param.h>
+#include <signal.h>
 
 typedef unsigned short color_t;
 

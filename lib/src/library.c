@@ -2,18 +2,17 @@
 // Created by School on 6/4/16.
 //
 
+#include "library.h"
+#include "color.h"
+
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <time.h>
 #include <errno.h>
-#include "library.h"
-
 #include <linux/fb.h>
-#include <lib/include/color.h>
 #include <sys/termios.h>
-#include <stdio.h>
 
 struct singleton {
     char sharedData[256];
@@ -29,7 +28,6 @@ struct singleton {
 };
 
 struct termio original_termio;
-
 
 #define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
 
@@ -79,7 +77,7 @@ void destruct_instance(struct singleton *pSingleton) {
 
 void init_graphics() {
     //Settings for stdin (source: svgalib):
-    int fd = fileno(stdin);
+    int fd = 0;
     struct termio zap;
     ioctl(fd, TCGETA, &original_termio);
     zap = original_termio;
@@ -109,7 +107,7 @@ size_t get_vertical_screen_size() {
 
 void exit_graphics() {
     //Restore original stdin
-    int fd = fileno(stdin);
+    int fd = 0;
     ioctl(fd, TCSETA, &original_termio);
 
     clear_screen();
@@ -165,7 +163,7 @@ void clear_screen() {
 
 
 char getkey() {
-    int fd = fileno(stdin);
+    int fd = 0;
 
     char c = '\0';
     int e = (int) read(fd, &c, 1);

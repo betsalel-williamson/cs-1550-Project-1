@@ -6,10 +6,9 @@
 #include <signal.h>
 #include <sys/param.h>
 #include <stdlib.h>
+#include <lib/include/draw.h>
 #include "library.h"
 #include "color.h"
-
-void draw_sample();
 
 /**
  * Handle quit to correctly exit and restore state on CTR-C.
@@ -34,21 +33,9 @@ int main(int argc, char **argv) {
 
     draw_sample_colors();
 
+    draw_rect(20, 20, 40, 100, Orange);
+
     exit_graphics();
 
     exit(EXIT_SUCCESS);
-}
-
-# define SAMPLE_BUFFER_SIZE 640*480
-
-void draw_sample() {
-    unsigned short buffer[SAMPLE_BUFFER_SIZE] = {};
-    int i;
-    for (i = 0; i < SAMPLE_BUFFER_SIZE; ++i) {
-        buffer[i] = rgb(255, 255, 255);
-    }
-
-//    puts("\033[2J");
-
-    write_to_frame_buffer(buffer, SAMPLE_BUFFER_SIZE);
 }

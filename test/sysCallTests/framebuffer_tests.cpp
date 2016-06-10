@@ -45,7 +45,7 @@ TEST(Frame_buffer_tests, Write_five_bytes_to_zeroth_framebuffer) {
     ASSERT_EQ(bytesWritten, 5);
 }
 
-TEST(Frame_buffer_tests, Get_screen_size) {
+TEST(Frame_buffer_tests, Get_frame_buffer_len) {
 
     size_t x = get_frame_buffer_len();
 

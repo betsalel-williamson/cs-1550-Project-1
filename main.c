@@ -38,7 +38,9 @@ int main(int argc, char **argv) {
 
     draw_text(40, 40, "abc", Red);
 
-    sleep_ms(2000);
+    draw_text(636, 476, "def", Orange);
+
+    sleep_ms(5000);
 
     exit_graphics();
 

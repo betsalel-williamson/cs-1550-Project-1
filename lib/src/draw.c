@@ -65,6 +65,31 @@ void draw_rect(int x1, int y1, int width, int height, color_t c) {
     }
 }
 
+void increment_x_y(int *x, int *y) {
+    int my_x = *x;
+    int my_y = *y;
+
+    int go_to_next_row = 0;
+    if (my_x + 8 > get_horizontal_screen_size()) {
+        go_to_next_row = 1;
+    }
+
+    int go_to_next_col = 0;
+    if (my_y + 16 > get_vertical_screen_size()) {
+        go_to_next_col = 1;
+    }
+
+    if (go_to_next_row) {
+        *x = 0;
+    } else {
+        *x += 8;
+    }
+
+    if (go_to_next_col) {
+        *y = 0;
+    }
+}
+
 void draw_text(int x, int y, const char *text, color_t c) {
     unsigned short *fb = get_frame_buffer();
 
@@ -74,7 +99,7 @@ void draw_text(int x, int y, const char *text, color_t c) {
     int temp_address = address;
 
     int i;
-    for (i = 0; text[i] != '\0'; ++i, x+=8, address = get_address_from_x_y(x, y)) {
+    for (i = 0; text[i] != '\0'; ++i, increment_x_y(&x, &y), address = get_address_from_x_y(x, y)) {
         int letter = text[i];
 
         int j;
@@ -94,6 +119,3 @@ void draw_text(int x, int y, const char *text, color_t c) {
     }
 }
 
-int x_y_to_buffer(int x, int y) {
-
-}

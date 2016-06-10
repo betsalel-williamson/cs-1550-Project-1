@@ -30,11 +30,11 @@ int main(int argc, char **argv) {
 
     init_graphics();
 
-//    draw_sample_colors();
+    draw_sample_colors();
 
-//    draw_rect(20, 20, 100, 40, Orange);
-//
-//    sleep_ms(1000);
+    draw_rect(20, 20, 100, 40, Orange);
+
+    sleep_ms(1000);
 
     draw_text(40, 40, "abc", Red);
 

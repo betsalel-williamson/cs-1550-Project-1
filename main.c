@@ -2,29 +2,22 @@
 // Created by Betsalel Williamson on 6/4/16.
 //
 
-#include <stdio.h>
 #include <signal.h>
 #include <sys/param.h>
-#include <stdlib.h>
-#include "syscalls.h"
+#include <lib/include/draw.h>
+#include "library.h"
 #include "color.h"
-
-void draw_sample();
 
 /**
  * Handle quit to correctly exit and restore state on CTR-C.
  */
 void sig_handler(int signo) {
-    printf("\n\nProcessing received signal: %d\n", signo);
 
     exit_graphics();
 
-    if (signo == SIGINT)
-    {
-        exit(EXIT_SUCCESS);
+    if (signo == SIGINT) {
+        return;
     }
-    // else
-    exit(EXIT_FAILURE);
 }
 
 int main(int argc, char **argv) {
@@ -34,20 +27,17 @@ int main(int argc, char **argv) {
 
     draw_sample_colors();
 
+    draw_rect(20, 20, 100, 40, Orange);
+
+    sleep_ms(1000);
+
+    draw_text(40, 40, "abc", Red);
+
+    draw_text(636, 476, "def", Orange);
+
+    sleep_ms(5000);
+
     exit_graphics();
 
-    exit(EXIT_SUCCESS);
-}
-
-# define SAMPLE_BUFFER_SIZE 1280*240
-void draw_sample() {
-    unsigned short buffer[SAMPLE_BUFFER_SIZE] = {};
-    int i;
-    for (i = 0; i < SAMPLE_BUFFER_SIZE; ++i) {
-        buffer[i] = rgb(255, 255, 255);
-    }
-
-//    puts("\033[2J");
-
-    write_to_frame_buffer(buffer, SAMPLE_BUFFER_SIZE);
+    return 1;
 }

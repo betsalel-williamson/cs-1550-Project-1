@@ -13,6 +13,7 @@
 #include <linux/fb.h>
 #include <lib/include/color.h>
 #include <sys/termios.h>
+#include <stdio.h>
 
 struct singleton {
     char sharedData[256];
@@ -26,6 +27,9 @@ struct singleton {
     size_t horizontal;
     size_t vertical;
 };
+
+struct termio original_termio;
+
 
 #define FRAME_BUFFER_FILE_DESCRIPTOR "/dev/fb0"
 
@@ -74,11 +78,15 @@ void destruct_instance(struct singleton *pSingleton) {
 }
 
 void init_graphics() {
-    struct termios term;
-    int openLocation;
-    int ioResult;
-    openLocation = open("/dev/tty0",O_RDWR);
-    ioResult = ioctl(openLocation,TCGETS,&term);
+    //Settings for stdin (source: svgalib):
+    int fd = fileno(stdin);
+    struct termio zap;
+    ioctl(fd, TCGETA, &original_termio);
+    zap = original_termio;
+    zap.c_cc[VMIN] = 0;
+    zap.c_cc[VTIME] = 0;
+    zap.c_lflag = 0;
+    ioctl(fd, TCSETA, &zap);
 //    clear_screen();
     color_whole_screen(White);
 
@@ -100,6 +108,10 @@ size_t get_vertical_screen_size() {
 }
 
 void exit_graphics() {
+    //Restore original stdin
+    int fd = fileno(stdin);
+    ioctl(fd, TCSETA, &original_termio);
+
     clear_screen();
     struct singleton *instance = get_instance();
     destruct_instance(instance);
@@ -153,19 +165,12 @@ void clear_screen() {
 
 
 char getkey() {
-    struct timeval tv = { 0L, 0L };
-    fd_set fds;
-    FD_ZERO(&fds);
-    FD_SET(0, &fds);
+    int fd = fileno(stdin);
 
-    select(1, &fds, NULL, NULL, &tv);
+    char c = '\0';
+    int e = (int) read(fd, &c, 1);
+    if (e == 0) c = '\0';
 
-    int r;
-    unsigned char c;
-    if ((r = (int) read(0, &c, sizeof(c))) < 0) {
-        return (char) r;
-    } else {
-        return c;
-    }
+    return c;
 };
 

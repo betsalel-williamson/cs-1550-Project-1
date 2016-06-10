@@ -84,7 +84,7 @@ void draw_text(int x, int y, const char *text, color_t c) {
             int k;
             for (k = 0; k < width; ++k) {
 
-                if (byte & (1 << k)) {
+                if (byte & (0b01 << (width-k))) {
                     fb[temp_address++] = c;
                 }
             }

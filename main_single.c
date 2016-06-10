@@ -1,4 +1,17 @@
-#include "library.c"
+#include <sys/param.h>
+#include "library.h"
+
+/**
+ * Handle quit to correctly exit and restore state on CTR-C.
+ */
+void sig_handler(int signo) {
+
+    exit_graphics();
+
+    if (signo == SIGINT) {
+        return;
+    }
+}
 
 int main(int argc, char **argv) {
     signal(SIGINT, sig_handler);

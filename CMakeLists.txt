@@ -15,10 +15,10 @@ include_directories(${SysCallLibs_SOURCE_DIR}/include
 add_executable(Project1_${PROJECT_NAME} main.c)
 target_link_libraries(Project1_${PROJECT_NAME} SysCallLibs)
 
-add_executable(Sample_${PROJECT_NAME} square.c library.c)
+add_executable(Sample_${PROJECT_NAME} square.c library.c library.h iso_font.h)
 #target_link_libraries(Sample_${PROJECT_NAME} SysCallLibs)
 
-add_executable(Single_${PROJECT_NAME} main_single.c library.c)
+add_executable(Single_${PROJECT_NAME} main_single.c library.c library.h iso_font.h)
 
 
 

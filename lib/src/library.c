@@ -75,7 +75,7 @@ void init_graphics() {
     get_instance();
 }
 
-size_t get_screen_size() {
+size_t get_frame_buffer_len() {
     struct singleton *instance = get_instance();
     return instance->len;
 }

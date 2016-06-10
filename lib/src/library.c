@@ -16,7 +16,7 @@
 
 struct singleton {
     char sharedData[256];
-    unsigned char *frame_buffer;
+    unsigned short *frame_buffer;
     void *addr;
     size_t len;
     int prot;
@@ -52,7 +52,7 @@ struct singleton *get_instance() {
 
         instance->len = instance->horizontal * instance->vertical;
 
-        instance->frame_buffer = mmap(NULL, instance->len,
+        instance->frame_buffer = (unsigned short *) mmap(NULL, instance->len,
                                       instance->prot,
                                       instance->flags, instance->fildes, 0);
 
@@ -125,7 +125,7 @@ int write_to_frame_buffer(unsigned short *write_buffer, int num_bytes) {
     return i;
 }
 
-unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
+unsigned short * read_frame_buffer_with_offset(size_t buffer_size, off_t offset, off_t pa_offset) {
     struct singleton *instance = get_instance();
     return instance->frame_buffer;
 //
@@ -135,13 +135,13 @@ unsigned char *read_frame_buffer_with_offset(size_t buffer_size, off_t offset, o
 //                MAP_SHARED, fd, pa_offset);
 }
 
-unsigned char *read_frame_buffer(size_t buffer_size) {
+unsigned short * read_frame_buffer(size_t buffer_size) {
 
     return read_frame_buffer_with_offset(buffer_size, 0, 0);
 }
 
 
-unsigned char *get_frame_buffer() {
+unsigned short * get_frame_buffer() {
     struct singleton *instance = get_instance();
     return instance->frame_buffer;
 }

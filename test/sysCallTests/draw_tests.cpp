@@ -29,13 +29,13 @@ TEST(DrawTests, Get_address_from_x_y) {
 
     ASSERT_EQ(639, get_address_from_x_y(639,0));
 
-    ASSERT_EQ(-1, get_address_from_x_y(640,0));
+    ASSERT_EQ(-1, get_address_from_x_y(get_horizontal_screen_size(),0));
 
     ASSERT_EQ(640, get_address_from_x_y(0,1));
 
     ASSERT_EQ(480*640, get_address_from_x_y(0,479));
 
-    ASSERT_EQ(-1, get_address_from_x_y(0,480));
+    ASSERT_EQ(-1, get_address_from_x_y(0,get_vertical_screen_size()));
 
 }
 

@@ -12,7 +12,7 @@ void draw_pixel(int x, int y, color_t color) {
     int address = get_address_from_x_y(x, y);
 
     fb[address] = (unsigned char) color;
-    fb[address + 1] = (unsigned char) color >> 8;
+//    fb[address + 1] = (unsigned char) color >> 8;
 }
 
 

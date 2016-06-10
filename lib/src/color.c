@@ -13,7 +13,7 @@ void color_whole_screen(color_t color) {
     int y;
     for (y = 0; y < v; ++y) {
         int x;
-        for (x = 0; x < h/2; ++x) {
+        for (x = 0; x < h; ++x) {
             draw_pixel(x, y, color);
         }
     }

@@ -74,7 +74,7 @@ void draw_text(int x, int y, const char *text, color_t c) {
     int temp_address = address;
 
     int i;
-    for (i = 0; text[i] != '\0'; ++i) {
+    for (i = 0; text[i] != '\0'; ++i, x+=8, address = get_address_from_x_y(x, y)) {
         int letter = text[i];
 
         int j;
